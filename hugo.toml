@@ -1,0 +1,11 @@
+baseURL = "https://portfolio.github.io/"
+languageCode = "es"
+title = "Mi Blog Técnico"
+theme = "hugo-theme-dream"
+
+[params]
+  author = "Fco. Javier Cousiño"
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
