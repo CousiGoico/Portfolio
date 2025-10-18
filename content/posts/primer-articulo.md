@@ -19,7 +19,7 @@ tags:
 draft: true
 ---
 
-Cut out summary from your post content here.
+Hello, world!
 
 <!--more-->
 

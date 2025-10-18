@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tag2 on Mi Blog Técnico</title>
-    <link>http://localhost:1313/tags/tag2/</link>
+    <link>https://portfolio.github.io/tags/tag2/</link>
     <description>Recent content in Tag2 on Mi Blog Técnico</description>
     <generator>Hugo</generator>
     <language>es</language>
     <lastBuildDate>Sun, 12 Oct 2025 07:30:17 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://portfolio.github.io/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Primer Articulo</title>
-      <link>http://localhost:1313/posts/primer-articulo/</link>
+      <link>https://portfolio.github.io/posts/primer-articulo/</link>
       <pubDate>Sun, 12 Oct 2025 07:30:17 +0200</pubDate>
-      <guid>http://localhost:1313/posts/primer-articulo/</guid>
+      <guid>https://portfolio.github.io/posts/primer-articulo/</guid>
       <description>&lt;p&gt;Cut out summary from your post content here.&lt;/p&gt;</description>
     </item>
   </channel>
