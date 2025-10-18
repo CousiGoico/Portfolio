@@ -6,14 +6,21 @@
     <description>Recent content in Tag2 on Mi Blog Técnico</description>
     <generator>Hugo</generator>
     <language>es</language>
-    <lastBuildDate>Sun, 12 Oct 2025 07:30:17 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 18 Oct 2025 07:05:28 +0200</lastBuildDate>
     <atom:link href="https://portfolio.github.io/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Segundo Articulo</title>
+      <link>https://portfolio.github.io/posts/segundo-articulo/</link>
+      <pubDate>Sat, 18 Oct 2025 07:05:28 +0200</pubDate>
+      <guid>https://portfolio.github.io/posts/segundo-articulo/</guid>
+      <description>&lt;p&gt;Cut out summary from your post content here.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Primer Articulo</title>
       <link>https://portfolio.github.io/posts/primer-articulo/</link>
       <pubDate>Sun, 12 Oct 2025 07:30:17 +0200</pubDate>
       <guid>https://portfolio.github.io/posts/primer-articulo/</guid>
-      <description>&lt;p&gt;Cut out summary from your post content here.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hello, world!&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
