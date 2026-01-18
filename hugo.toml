@@ -1,4 +1,4 @@
-baseURL = "https://portfolio.github.io/"
+baseURL = "https://cousigoico.github.io/Portfolio/"
 languageCode = "es"
 title = "Mi Blog Técnico"
 theme = "hugo-theme-dream"

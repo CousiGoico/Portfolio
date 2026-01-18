@@ -2,7 +2,7 @@
 title: Segundo Articulo
 date: 2025-10-18T07:05:28+02:00
 lastmod: 2025-10-18T07:05:28+02:00
-author: Author Name
+author: Javier Cousiño
 # avatar: /img/author.jpg
 # authorlink: https://author.site
 cover: /img/cover.jpg
