@@ -1,0 +1,11 @@
+# Hugo build output
+public/
+resources/_gen/
+.hugo_build.lock
+src/Portfolio/public/
+src/Portfolio/resources/_gen/
+src/Portfolio/.hugo_build.lock
+
+# General
+.DS_Store
+Thumbs.db
