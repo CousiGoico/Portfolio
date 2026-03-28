@@ -13,7 +13,7 @@ draft: false
 
 ## Definición
 
-Muestra detalles de una especifica aplicaicon, incluyendo detalles de su fuente. Muestra los metadatos que fueron enviados con la aplicación.
+Muestra detalles de una especifica aplicación, incluyendo detalles de su fuente. Muestra los metadatos que fueron enviados con la aplicación.
 
 ## Alias
 
@@ -39,7 +39,7 @@ Muestra detalles de una especifica aplicaicon, incluyendo detalles de su fuente.
 
 -s, --source: busca la aplicación en un origen concreto.
 
--e, --exact: busca una aplicación usando su macheo exacto.
+-e, --exact: busca una aplicación usando su matcheo exacto.
 
 --scope: selecciona el ámbito de instalación (usuario o máquina).
 
@@ -47,7 +47,7 @@ Muestra detalles de una especifica aplicaicon, incluyendo detalles de su fuente.
 
 --locale: configuración regional a usar.
 
---versions: muetra las versiones disponbiles de la aplicación.
+--versions: muestra las versiones disponibles de la aplicación.
 
 --header: encabezado HTTP de origen REST de Windows-Package-Manager.
 
@@ -61,7 +61,7 @@ Muestra detalles de una especifica aplicaicon, incluyendo detalles de su fuente.
 
 --verbose, --verbose-logs: usado para sobreescribir los ajustes de login y crear logs detallados.
 
---disable-interactivity: desabilita las indicaciones interactivas. 
+--disable-interactivity: deshabilita las indicaciones interactivas. 
 
 ## Metadata
 

@@ -24,7 +24,7 @@ draft: false
 8. [Finaliza todo lo que empieces](#FinishEverythingYouStart)
 9. [Aplica principios de diseño y patrones](#ApplyDesignPrincipalesAndPatterns)
 10. [No desarrolles carácteristicas no solicitadas](#DontDevelopedCharacteristicsUnsolicited)
-11. [Desarrolla código modular y flexiblev](#DevelopModularAndFlexibleCode)
+11. [Desarrolla código modular y flexible](#DevelopModularAndFlexibleCode)
 12. [Hablidades blandas del desarrollador](#DevelopSoftSkills)
 13. [Comenta lo esencial](#CommentTheEssential)
 14. [Toma un exhaustivo control sobre tus versiones](#TakeExhaustiveControlOfYoursVersions)
@@ -38,7 +38,7 @@ draft: false
 22. [Sé un experto de prácticas de como limpiar código y refactorizar](#BeExpertCleanCePracticesAndRefactorings)
 23. [Reusa parte de tus propios proyectos](#ReusePartOfYourOwnProjects)
 24. [Escribe código homogeneo](#WriteHomogeneousCode)
-25. [Trabaja enfcado](#WorkFocused)
+25. [Trabaja enfocado](#WorkFocused)
 26. [Identifica los "bad smells"](#IdentifyBadSmells)
 27. [Trabaja en proyectos personales](#WorkInPersonalProjects)
 28. [Prueba hasta que obtengas suficiente](#TestUntilGetEnough)
@@ -62,7 +62,7 @@ Si tú no paras añadiendo nuevo código y no paras para comprobar que has escri
 
 ### Aprende algo nuevo cada semana <a id="" href="#LearnEachWekk" class="anchor"></a>
 
-Si tú no progresas, es por que estás llendo hacía atras. 
+Si tú no progresas, es por que estás yendo hacía atras. 
 
 Debes sentirte cómodo haciendo las mismas cosas año tras año: trabajando en los mismos tipos de proyectos, siempre usando los mismos tipos de solución, en el mismo entorno y usando el mismo lenguaje. 
 
@@ -110,9 +110,9 @@ Los principios de diseño son un salvavidas para el código que estas escribiend
 
 Tomar requerimientos es una tarea complicada que consiste en entender las necesidades del cliente y traducirlo a un documento que los programadores comprendan. Este paso debe ser realizado por alguien que entienda el contexto del cliente, domine el lenguaje usado por ellos y los requerimientos que necesita. Muchas veces vamos más alla y desarrollamos procesos que pensamos que serán útiles y no se nos han pedido. Lo que ocurre es que a veces, estas carácteristicas añadidas no son necesarias, o se pueden obtener de otra manera sin haber dedicado tiempo o dinero en programarlas.
 
-### Desarrolla código modular y flexiblev <a id="" href="#DevelopModularAndFlexibleCode" class="anchor"></a>
+### Desarrolla código modular y flexible <a id="" href="#DevelopModularAndFlexibleCode" class="anchor"></a>
 
-Una aplicación se puede reducir a un conjunto de partes (módulos, librerías, componentes, etc.) que relaciona uno con otro para ofrecer alguna funcionalidad. Lo deseable es que esas partes sean lo más pequeñas y aisladas posibles. Tu aplicación es muy acomplada cuando realizas algún cambio y automaticamente aparecen errores inesperadamente. Una aplicación con un alto nivel de desacoplamiento permite trabajar en un módulo sin afectar al resto, facilitando las pruebas y pudiendo ser sustituido por una versión diferente. Un ejemplo típico es cuando usamos una base de datos y es imposible cambiarlo por otra. 
+Una aplicación se puede reducir a un conjunto de partes (módulos, librerías, componentes, etc.) que relaciona uno con otro para ofrecer alguna funcionalidad. Lo deseable es que esas partes sean lo más pequeñas y aisladas posibles. Tu aplicación es muy acoplada cuando realizas algún cambio y automáticamente aparecen errores inesperadamente. Una aplicación con un alto nivel de desacoplamiento permite trabajar en un módulo sin afectar al resto, facilitando las pruebas y pudiendo ser sustituido por una versión diferente. Un ejemplo típico es cuando usamos una base de datos y es imposible cambiarlo por otra. 
 
 ### Habilidades blandas del desarrollador <a id="" href="#DevelopSoftSkills" class="anchor"></a>
 
@@ -175,7 +175,7 @@ Trata de aislar la funcionalidad (librerías, módulos, frameworks, ...) para po
 
 Imagina que estas leyendo una novela y cada capitulo se escribe con una letra diferente, un estilo diferente y un enfoque diferente, te volverías loco al leerlo. Por ello, es muy importante tener un código homogeneo en el que en todas las clases las variables se escriban de la misma manera, los nombres de las funciones siguan un estilo, el código esté organizado con un orden, ... De esta manera, el programador que coja tu código sabrá donde se encuentra cierta funcionalidad, variable o método. 
 
-### Trabaja enfcado <a id="" href="WorkFocused" class="anchor"></a>
+### Trabaja enfocado <a id="" href="WorkFocused" class="anchor"></a>
 
 Necesitamos trabajar productivamente, para ello hay que dedicarle tiempo para hacer el mejor trabajo y obtener los mayores resultados. Aquellas actividades en las que fluyes (momento en el que realizando una tarea, pierdes la noción del tiempo), serás tu pasión y vocación. Cuando más enfocado estés en tu tarea, más productivo serás, y por el contrario, cuanto más tiempo distraido estes o te distraigan, menos productivo serás. La clave para realizar mejor un trabajo es estar enfocado, no hacer más horas.
 

@@ -47,7 +47,7 @@ JSX requiere que los tags sean explicitamente cerrados. Las etiquetas como `<img
 
 3. __Usa camelCase__
 
-JSX se convierte en JavaScript y los atributos escritos se convierten en claves de objetos JavaScript. En sus propios componentes, querrá leer los atributos como variables. Pero JavaScript tiene limitaciones en losombres de variables, ya que no pueden contener guiones ni ser palabras reservadas como `class` (en su lugar debes usar className).  Es el motivo por el que atributos en React están escritos en camelCase. 
+JSX se convierte en JavaScript y los atributos escritos se convierten en claves de objetos JavaScript. En sus propios componentes, querrá leer los atributos como variables. Pero JavaScript tiene limitaciones en los nombres de variables, ya que no pueden contener guiones ni ser palabras reservadas como `class` (en su lugar debes usar className).  Es el motivo por el que atributos en React están escritos en camelCase. 
 
         <img 
             src="https://i.imgur.com/yXOvdOSs.jpg" 

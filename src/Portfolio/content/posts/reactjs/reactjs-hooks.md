@@ -59,7 +59,7 @@ Se usa para conectarse y sincronizarse con sistemas externos (red, DOM del naveg
 
 + __useEffect__: permite a un componente conectarse con un sistema externo.
 + __useLayoutEffect__: (variación poco usado de useEffect) se activa antes de que el navegador vuelva a pintar la pantalla. Se suelen hacer cálculos de maquetación (layout).
-+ __useInsertionEffect__: (variación poco usado de useEffect) se activ antes de que React haga cambios en el DOM. Aquí las bibliotecas pueden insertar CSS dinámico. 
++ __useInsertionEffect__: (variación poco usado de useEffect) se activa antes de que React haga cambios en el DOM. Aquí las bibliotecas pueden insertar CSS dinámico. 
 
         function ChatRoom({ roomId }) {
             useEffect(() => {
@@ -76,7 +76,7 @@ Permite realizar un renderizado cacheado si los datos no han sido cambiado desde
 + __useMemo__: permite guardar en caché los resultados de un cálculo costoso.
 + __useCallback__: permite guardar en caché una función definida antes de pasarl a un componente optimizado.
 + __useTransition__: marca una transición de estado como no bloqueante para permitir que otras actualizaciones la interrumpan.
-+ __UseDeferredValue__: aplaza la actualización de una parte no crítica de la interfaz de usuairo y deja que otras partes se actualizen primero.
++ __UseDeferredValue__: aplaza la actualización de una parte no crítica de la interfaz de usuario y deja que otras partes se actualicen primero.
 
         function TodoList({ todos, tab, theme }) {
             const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);

@@ -42,7 +42,7 @@ Hay límites en el número de espacios de códigos que puede crear y el número 
 
 #### Facturación cuentas gratuitas o pro
 
-|Plan de cuenta|Almacenamiento al mes|Horas dnúcleo al mes|
+|Plan de cuenta|Almacenamiento al mes|Horas de núcleo al mes|
 |--------------|---------------------|--------------------|
 |GitHub Free para cuentas personaes|15 GB al mes|120|
 |GitHub Pro|20 GB al mes|180|
@@ -98,7 +98,7 @@ Si cierras el codespace sin interacción o si cierras sin pararlo, el codespace 
 
 ### Recompilar un codespace
 
-Puedes recompilar un codespace para mplemtnar cambios en la configuración de tu codespace. Cuando recompilas reusarás imagenes de tu caché para acelerar la compilación, aunque también puedes limpiar la caché antes de compilar.
+Puedes recompilar un codespace para implementar cambios en la configuración de tu codespace. Cuando recompilas reusarás imagenes de tu caché para acelerar la compilación, aunque también puedes limpiar la caché antes de compilar.
 
 > [!NOTE]
 > Los cambios hechos fuera del directorio /workspaces se perderán al hacer un compilado.

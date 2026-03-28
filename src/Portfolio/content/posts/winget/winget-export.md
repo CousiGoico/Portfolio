@@ -27,7 +27,7 @@ Exporta a un fichero JSON un listado de las aplicaciones instaladas en la máqui
 
 --include-versions: [opcional] incluye la versión de la aplicación instalada.
 
---accept-source-agreements: usado para aceptar la licencia de acuerdso.
+--accept-source-agreements: usado para aceptar la licencia de acuerdos.
 
 -?, --help: muestra la información del comando.
 
@@ -35,9 +35,9 @@ Exporta a un fichero JSON un listado de las aplicaciones instaladas en la máqui
 
 --logs, --open-logs: abre la localización por defecto de los logs.
 
---verbose, --verbose-logs: usado para sobreescribir los ajustesy crear detalles de logs.
+--verbose, --verbose-logs: usado para sobreescribir los ajustes y crear detalles de logs.
 
---disable-interactivity: desabilita las indicaciones interactivas.
+--disable-interactivity: deshabilita las indicaciones interactivas.
 
 ## Esquema JSON 
 

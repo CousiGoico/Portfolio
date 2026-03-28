@@ -56,8 +56,8 @@ programática. Envuelve un árbol de componentes en un `<Profiler` para medir su
 + onRender: un callback onRender que React llama cada vez que los componenentes dentro del árbol perfilado se actualizan. Recibe información sobre lo que se renderizó y cuánto tiempo llevó.
     + id: id del profiler que se entregó. Esto permite identificar que parte del árbol se entregó si estás usando varios perfiles.
     + phase: ("mount", "update", "nested-update") indica si el árbol acaba de ser montado por primera vez o se ha vuelto a renderizar debo a un cambio en las props, el estado o los hooks. 
-    + actualDuration: milisegundos que tardó en rendrzar.Este valor debería diminuir después del montaje inicial, ya que los descendientes sólo se renderizarán si cambian sus propiedades.
-    + baseDuration: milisegundos que estima cuánto tiempo tarda en volver a renderizar. Se suman las duraciones del renderizado de cada componente del árbol. Compara `actualDuration` con este valor para ver si la momorización está funcionando.
+    + actualDuration: milisegundos que tardó en renderizar.Este valor debería disminuir después del montaje inicial, ya que los descendientes sólo se renderizarán si cambian sus propiedades.
+    + baseDuration: milisegundos que estima cuánto tiempo tarda en volver a renderizar. Se suman las duraciones del renderizado de cada componente del árbol. Compara `actualDuration` con este valor para ver si la memorización está funcionando.
     + startTime: marca de tiempo desde que React empezó a renderizar.
     + endTime: tiempo final de la renderización.
 
@@ -68,7 +68,7 @@ programática. Envuelve un árbol de componentes en un `<Profiler` para medir su
 
 #### __Advertencias__
 
-+ Agrega cierta sobrecarga adicional, por lo que en el entorno de producción está deshabiitado por defecto.
++ Agrega cierta sobrecarga adicional, por lo que en el entorno de producción está deshabilitado por defecto.
 
 #### __Ejemplo__
 

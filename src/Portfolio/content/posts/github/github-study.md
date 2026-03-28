@@ -200,10 +200,10 @@ Crear un repositorio a partir de una plantilla es similar a bifurcar un reposito
 3. Selecciona **Crear un repositorio nuevo**.
 4. Usa el menú desplegable **Propietario** para seleccionar la cuenta que quieres que sea propietaria del repositorio.
 5. Teclea el nombre de tu repositorio, y una descripción opcional.
-6. Elige la visibiilidad del repositorio.
+6. Elige la visibilidad del repositorio.
 7. Seleccione **Include all branches** para incluir la estructura de directorios y archivos de todas las ramas.
 8. Seleccione las aplicaciones del Marketplace que le gustaría usar en el repositorio.
-9. Haga click en **Create repositoriy from template**.
+9. Haga click en **Create repository from template**.
 
 #### Crear plantilla desde repositorio <a id="CrearPlantillaDesdeRepositorio"></a>
 

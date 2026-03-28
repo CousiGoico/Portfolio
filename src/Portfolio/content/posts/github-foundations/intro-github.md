@@ -36,7 +36,7 @@ La plataforma GitHub Enterprise incluye características de seguridad nativas y 
 
 La plataforma GitHub Enterprise se centra en la experiencia del desarrollador. Tiene la escala necesaria para ofrecer perspectivas que cambian el sector, capacidades de colaboración para una eficiencia transformadora, las herramientas para aumentar la productividad, seguridad en cada paso y la inteligencia artificial para impulsarlo todo a nuevas cotas en una única plataforma integrada.
 
-## Introducción a lorepositorios
+## Introducción a los repositorios
 
 ### ¿Qué es un repositorio?
 
