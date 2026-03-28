@@ -59,7 +59,7 @@ Instala la herramienta especificada. Tiene el alias __add__.
 
 -l, --location: localización de la instalación (si lo soporta).
 
---ignore-security-hash: ignorar la comprobación de hash (no recomenado).
+--ignore-security-hash: ignorar la comprobación de hash (no recomendado).
 
 --ignore-local-archive-mailware-scan: ignore el escaneo de malware como parte de la instalación.
 
@@ -77,7 +77,7 @@ Instala la herramienta especificada. Tiene el alias __add__.
 
 --uninstall-previous: desinstala la versión previa durante la actualización.
 
---force: ejecuta el comando y continua con problemas no realizacionados con la seguridad.
+--force: ejecuta el comando y continua con problemas no relacionados con la seguridad.
 
 -?, --help: obtiene información adicional sobre el comando.
 

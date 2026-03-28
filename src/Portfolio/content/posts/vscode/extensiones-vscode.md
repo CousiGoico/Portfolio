@@ -24,7 +24,7 @@ draft: false
 ## JavaScript
 
 + JavaScript (ES6) code snippets: code snippets for JavaScript in ES6.
-+ ESLInt: check your JavaScript for common problems, such as syntax errors, formatting, ...
++ ESLint: check your JavaScript for common problems, such as syntax errors, formatting, ...
 
 ## Styles
 
@@ -58,7 +58,7 @@ draft: false
 + RapidAPI Client: to create calls to api.
 + Thunder Client: to create calls to api.
 + Live Server: launches a local server with the page selected.
-+ Microsoft Edge Tools for VS Code: lie analysis, console and application tool, breakpoint support, ...
++ Microsoft Edge Tools for VS Code: live analysis, console and application tool, breakpoint support, ...
 + JSON to TS: extension to convert JSON object to typescript interface.
 + Image preview: preview of image by url.
 + Todo Tree: to search \\ TODO.

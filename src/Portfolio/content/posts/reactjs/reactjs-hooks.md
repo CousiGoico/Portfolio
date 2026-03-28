@@ -1,5 +1,5 @@
 ---
-title: "REACT JS"
+title: "React JS - Hooks"
 date: 2025-10-12T07:30:17+02:00
 lastmod: 2025-10-12T07:30:17+02:00
 author: Fco. Javier Cousiño
