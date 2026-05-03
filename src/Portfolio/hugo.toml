@@ -2,6 +2,7 @@ baseURL = "https://cousigoico.github.io/Portfolio/"
 languageCode = "es"
 title = "Mi Blog Técnico"
 theme = "hugo-theme-dream"
+themesDir = "../../themes"
 
 [params]
   author = "Fco. Javier Cousiño"
