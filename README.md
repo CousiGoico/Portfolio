@@ -1,44 +1,45 @@
-# Portfolio
+# Mi Blog Técnico
 
-Personal portfolio and technical blog built with [Hugo](https://gohugo.io/).
+Blog personal desarrollado con [Hugo](https://gohugo.io/) y el tema [hugo-theme-dream](https://github.com/g1eny0ung/hugo-theme-dream).
 
-## Project Structure
+🌐 **URL**: [https://cousigoico.github.io/Portfolio/](https://cousigoico.github.io/Portfolio/)
 
-```
-/Portfolio
-│
-├── src/
-│   └── Portfolio/          # Hugo site source
-│
-├── docs/                   # Architecture diagrams, ADRs, notes
-│
-├── .editorconfig           # Code style consistency
-├── .gitignore              # Ignore build artifacts, secrets, etc.
-├── README.md               # Project overview
-├── LICENSE                 # License
-└── Portfolio.sln           # Solution file
-```
+## Autor
 
-## Getting Started
+**Fco. Javier Cousiño**
 
-### Prerequisites
+## Tecnologías
 
-- [Hugo](https://gohugo.io/installation/) (extended version)
+- [Hugo](https://gohugo.io/) (versión extended requerida)
+- Tema [hugo-theme-dream](https://github.com/g1eny0ung/hugo-theme-dream)
 
-### Running Locally
+## Requisitos
+
+- Hugo extended v0.97.0 o superior
+
+## Ejecución local
 
 ```bash
-cd src/Portfolio
-hugo server -D
+hugo server
 ```
 
-### Building
+El sitio estará disponible en `http://localhost:1313/Portfolio/`.
 
-```bash
-cd src/Portfolio
-hugo --minify
+## Estructura
+
+```
+content/posts/     # Artículos del blog
+static/img/        # Imágenes estáticas
+themes/            # Tema Hugo
+hugo.toml          # Configuración principal
 ```
 
-## Deployment
+## Posts
 
-The site is automatically deployed to GitHub Pages via GitHub Actions on every push to the `main` branch.
+- **Guía Completa: Crear un Bot de Telegram con C# (.NET)**
+- Primer artículo
+- Segundo artículo
+
+## Despliegue
+
+El sitio se despliega automáticamente en GitHub Pages en el repositorio [cousigoico.github.io](https://github.com/CousiGoico/cousigoico.github.io).

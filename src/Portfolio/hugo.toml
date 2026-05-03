@@ -1,10 +1,11 @@
-baseURL = "https://portfolio.github.io/"
+baseURL = "https://cousigoico.github.io/Portfolio/"
 languageCode = "es"
 title = "Mi Blog Técnico"
 theme = "hugo-theme-dream"
 
 [params]
   author = "Fco. Javier Cousiño"
+  avatar = "img/Icono.png"
   defaultTheme = "auto"
   ShowReadingTime = true
   ShowShareButtons = false
