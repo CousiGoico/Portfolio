@@ -5,6 +5,7 @@ theme = "hugo-theme-dream"
 
 [params]
   author = "Fco. Javier Cousiño"
+  avatar = "img/Icono.png"
   defaultTheme = "auto"
   ShowReadingTime = true
   ShowShareButtons = false

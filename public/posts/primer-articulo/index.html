@@ -1,885 +1,0 @@
-<!DOCTYPE html>
-<html lang="es"
-  x-data
-  :class="$store.darkMode.class()"
-  :data-theme="$store.darkMode.theme()">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primer Articulo | Mi Blog Técnico</title>
-
-    
-
-<link rel="canonical" href="https://cousigoico.github.io/Portfolio/posts/primer-articulo/" />
-
-
-
-<meta name="author" content="Javier Cousiño" />
-<meta name="description" content="DateOnly and TimeOnly DateOnly and TimeOnlyℹ️ Introducción🕑 DateOnly✅ Ventajas🗒️ Ejemplos🕑 TimeOnly✅ Ventajas🗒️ Ejemplos🈯 Serializar DateOnly y TimeOnly⚙️ Trabajar con TimeOnly y DateTime🛠️ Operadores aritméticos y comparación de TimeOnly🔗 Referenciasℹ️ Introducción Las estructuras de datos DateOnly y TimeOnly representan un dato de tipo fecha sin la hora o una hora del día sin especificar el día. Estas estructuras de datos están disponibles a partir de la versión 6 de .NET Core.
-🕑 DateOnly Representa una fecha sin hora, por lo que corresponde a un día completo. Se le puede establecer los valores del 01/01/0001 al 31/12/9999. En su constructor se le puede indicar el calendario a usar (aunque siempre se convertirá al gregoriano):
-var hebrewCalendar = new System.Globalization.HebrewCalendar();var theDate = new DateOnly(5776, 2, 8, hebrewCalendar); // 8 Cheshvan 5776Console.WriteLine(theDate);/* Este ejemplo produce el siguiente valor:* 10/21/2015*/✅ Ventajas El valor de la fecha no puede ser modificada por la zona horaria, lo que si ocurría con el tipo de datos DateTime.
-Al serializar un valor de tipo DateOnly serializa menos datos que el tipo DateTime.
-Este valor coincide mejor con el tipo de base de datos Date de SqlServer.
-🗒️ Ejemplos Convertir DateTime a DateOnly
-var today = DateOnly.FromDateTime(DateTime.Now);Console.WriteLine($&quot;Today is {today}&quot;);/* Este ejemplo produce el siguiente valor:* Today is 03/08/2024*/Agregar o restar días, meses o años
-var theDate = new DateOnly(2015, 10, 21);var nextDay = theDate.AddDays(1);var previousDay = theDate.AddDays(-1);var decadeLater = theDate.AddYears(10);var lastMonth = theDate.AddMonths(-1);Console.WriteLine($&quot;Date: {theDate}&quot;);Console.WriteLine($&quot; Next day: {nextDay}&quot;);Console.WriteLine($&quot; Previous day: {previousDay}&quot;);Console.WriteLine($&quot; Decade later: {decadeLater}&quot;);Console.WriteLine($&quot; Last month: {lastMonth}&quot;);/* Este ejemplo produce el siguiente valor:* Date: 10/21/2015* Next day: 10/22/2015* Previous day: 10/20/2015* Decade later: 10/21/2025* Last month: 9/21/2015*/Analizar DateOnly y darle formato
-var theDate = DateOnly.ParseExact(&quot;21 Oct 2015&quot;, &quot;dd MMM yyyy&quot;, CultureInfo.InvariantCulture); // Formato personalizadovar theDate2 = DateOnly.Parse(&quot;October 21, 2015&quot;, CultureInfo.InvariantCulture);Console.WriteLine(theDate.ToString(&quot;m&quot;, CultureInfo.InvariantCulture)); // Patrón mes díaConsole.WriteLine(theDate2.ToString(&quot;o&quot;, CultureInfo.InvariantCulture)); // Formato ISO 8601Console.WriteLine(theDate2.ToLongDateString());/* Este ejemplo produce el siguiente valor:* October 21* 2015-10-21* Wednesday, October 21, 2015*/Comparar DateOnly
-var theDate = DateOnly.ParseExact(&quot;21 Oct 2015&quot;, &quot;dd MMM yyyy&quot;, CultureInfo.InvariantCulture); // Formato personalizadovar theDate2 = DateOnly.Parse(&quot;October 21, 2015&quot;, CultureInfo.InvariantCulture);var dateLater = theDate.AddMonths(6);var dateBefore = theDate.AddDays(-10);Console.WriteLine($&quot;Consider {theDate}...&quot;);Console.WriteLine($&quot; Is &#39;{nameof(theDate2)}&#39; equal? {theDate == theDate2}&quot;);Console.WriteLine($&quot; Is {dateLater} after? {dateLater &gt; theDate} &quot;);Console.WriteLine($&quot; Is {dateLater} before? {dateLater &lt; theDate} &quot;);Console.WriteLine($&quot; Is {dateBefore} after? {dateBefore &gt; theDate} &quot;);Console.WriteLine($&quot; Is {dateBefore} before? {dateBefore &lt; theDate} &quot;);/* Este ejemplo produce el siguiente valor:* Consider 10/21/2015* Is &#39;theDate2&#39; equal? True* Is 4/21/2016 after? True* Is 4/21/2016 before? False* Is 10/11/2015 after? False* Is 10/11/2015 before? True*/🕑 TimeOnly Representa una hora del día sin fecha, cuyo valor va del 00:00:00.0000000 al 23:59:59.9999999. Antes de crearse esta estructura de datos, se solía usar TimeSpan.
-✅ Ventajas En un TimeSpan el rango superior puede superar los 29 000 años o tener valores negativos, cosa que no sucede con TimeOnly.
-Se puede establecer un valor fuera del día en el TimeSpan pero no en el TimeOnly.
-Si se usa DateTime para establecer una hora, se suele aplicar como día DateTime.MinValue y manipulando el valor puede hacer que lance una excepción del tipo OutOfRange.
-Con TimeOnly serializa menos datos.
-🗒️ Ejemplos Convertir DateTime a DateOnly
-var now = TimeOnly.FromDateTime(DateTime.Now);Console.WriteLine($&quot;It is {now} right now&quot;);/* Este ejemplo produce el siguiente valor:* It is 2:01 PM right now*/Agregar o restar tiempo
-var theTime = new TimeOnly(7, 23, 11);var hourLater = theTime.AddHours(1);var minutesBefore = theTime.AddMinutes(-12);var secondsAfter = theTime.Add(TimeSpan.FromSeconds(10));var daysLater = theTime.Add(new TimeSpan(hours: 21, minutes: 200, seconds: 83), out int wrappedDays);var daysBehind = theTime.AddHours(-222, out int wrappedDaysFromHours);Console.WriteLine($&quot;Time: {theTime}&quot;);Console.WriteLine($&quot; Hours later: {hourLater}&quot;);Console.WriteLine($&quot; Minutes before: {minutesBefore}&quot;);Console.WriteLine($&quot; Seconds after: {secondsAfter}&quot;);Console.WriteLine($&quot; {daysLater} is the time, which is {wrappedDays} days later&quot;);Console.WriteLine($&quot; {daysBehind} is the time, which is {wrappedDaysFromHours} days prior&quot;);/* Este ejemplo produce el siguiente valor:* Time: 7:23 AM* Hours later: 8:23 AM* Minutes before: 7:11 AM* Seconds after: 7:23 AM* 7:44 AM is the time, which is 1 days later * 1:23 AM is the time, which is -9 days prior*/Analizar TimeOnly y darle formato
-var theTime = TimeOnly.ParseExact(&quot;5:00 pm&quot;, &quot;h:mm tt&quot;, CultureInfo.InvariantCulture); // Formato personalizadovar theTime2 = TimeOnly.Parse(&quot;17:30:25&quot;, CultureInfo.InvariantCulture);Console.WriteLine(theTime.ToString(&quot;o&quot;, CultureInfo.InvariantCulture)); // Formato largoConsole.WriteLine(theTime2.ToString(&quot;t&quot;, CultureInfo.InvariantCulture)); // Formato cortoConsole.WriteLine(theTime2.ToLongTimeString());/* Este ejemplo produce el siguiente valor:* 17:00:00.0000000* 17:30* 5:30:25 PM*/🈯 Serializar DateOnly y TimeOnly Con la versión .NET 7 y posteriores, se admite la serialización de estas estructuras de datos.
-sealed file record Appointment(Guid Id,string Description,DateOnly Date,TimeOnly StartTime,TimeOnly EndTime);Appointment originalAppointment = new(Id: Guid.NewGuid(),Description: &quot;Take dog to veterinarian.&quot;,Date: new DateOnly(2002, 1, 13),StartTime: new TimeOnly(5,15),EndTime: new TimeOnly(5, 45));string serialized = JsonSerializer.Serialize(originalAppointment);Console.WriteLine($&quot;Resulting JSON: {serialized}&quot;);Appointment deserializedAppointment = JsonSerializer.Deserialize&lt;Appointment&gt;(serialized)!;bool valuesAreTheSame = originalAppointment == deserializedAppointment;Console.WriteLine($&quot;&quot;&quot;Original record has the same values as the deserialized record: {valuesAreTheSame}&quot;&quot;&quot;);⚙️ Trabajar con TimeOnly y DateTime TimeOnly puede crearse a partir de un TimeSpan y convertirse en ese valor. También puede utilizarse un DateTim para crear un TimeOnly.
-var theTime = TimeOnly.FromTimeSpan(new TimeSpan(23, 59, 59));var theTimeSpan = theTime.ToTimeSpan();Console.WriteLine($&quot;Variable &#39;{nameof(theTime)}&#39; is {theTime}&quot;);Console.WriteLine($&quot;Variable &#39;{nameof(theTimeSpan)}&#39; is {theTimeSpan}&quot;);/* Este ejemplo produce el siguiente valor:* Variable &#39;theTime&#39; is 11:59 PM* Variable &#39;theTimeSpan&#39; is 23:59:59*/Creación de un DateTime a través de un TimeOnly
-var theTime = new TimeOnly(11, 25, 46); // 11:25 AM and 46 secondsvar theDate = new DateOnly(2015, 10, 21); // October 21, 2015var theDateTime = theDate.ToDateTime(theTime);var reverseTime = TimeOnly.FromDateTime(theDateTime);Console.WriteLine($&quot;Date only is {theDate}&quot;);Console.WriteLine($&quot;Time only is {theTime}&quot;);Console.WriteLine();Console.WriteLine($&quot;Combined to a DateTime type, the value is {theDateTime}&quot;);Console.WriteLine($&quot;Converted back from DateTime, the time is {reverseTime}&quot;);/* Este ejemplo produce el siguiente valor:* Date only is 10/21/2015* Time only is 11:25 AM* * Combined to a DateTime type, the value is 10/21/2015 11:25:46 AM* Converted back from DateTime, the time is 11:25 AM*/🛠️ Operadores aritméticos y comparación de TimeOnly var start = new TimeOnly(10, 12, 01); // 10:12:01 AMvar end = new TimeOnly(14, 00, 53); // 02:00:53 PMvar outside = start.AddMinutes(-3);var inside = start.AddMinutes(120);Console.WriteLine($&quot;Time starts at {start} and ends at {end}&quot;);Console.WriteLine($&quot; Is {outside} between the start and end? {outside.IsBetween(start, end)}&quot;);Console.WriteLine($&quot; Is {inside} between the start and end? {inside.IsBetween(start, end)}&quot;);Console.WriteLine($&quot; Is {start} less than {end}? {start &lt; end}&quot;);Console.WriteLine($&quot; Is {start} greater than {end}? {start &gt; end}&quot;);Console.WriteLine($&quot; Does {start} equal {end}? {start == end}&quot;);Console.WriteLine($&quot; The time between {start} and {end} is {end - start}&quot;);/* Este ejemplo produce el siguiente valor:* Time starts at 10:12 AM and ends at 2:00 PM* Is 10:09 AM between the start and end? False* Is 12:12 PM between the start and end? True* Is 10:12 AM less than 2:00 PM? True* Is 10:12 AM greater than 2:00 PM? False* Does 10:12 AM equal 2:00 PM? False* The time between 10:12 AM and 2:00 PM is 03:48:52*/🔗 Referencias Microsoft Learn" />
-
-
-<meta name="keywords" content="Tag1,Tag2">
-
-
-
-<meta name="generator" content="Hugo 0.151.0">
-
-
-<meta property="og:url" content="https://cousigoico.github.io/Portfolio/posts/primer-articulo/">
-  <meta property="og:site_name" content="Mi Blog Técnico">
-  <meta property="og:title" content="Primer Articulo">
-  <meta property="og:description" content="DateOnly and TimeOnly DateOnly and TimeOnlyℹ️ Introducción🕑 DateOnly✅ Ventajas🗒️ Ejemplos🕑 TimeOnly✅ Ventajas🗒️ Ejemplos🈯 Serializar DateOnly y TimeOnly⚙️ Trabajar con TimeOnly y DateTime🛠️ Operadores aritméticos y comparación de TimeOnly🔗 Referenciasℹ️ Introducción Las estructuras de datos DateOnly y TimeOnly representan un dato de tipo fecha sin la hora o una hora del día sin especificar el día. Estas estructuras de datos están disponibles a partir de la versión 6 de .NET Core.
-🕑 DateOnly Representa una fecha sin hora, por lo que corresponde a un día completo. Se le puede establecer los valores del 01/01/0001 al 31/12/9999. En su constructor se le puede indicar el calendario a usar (aunque siempre se convertirá al gregoriano):
-var hebrewCalendar = new System.Globalization.HebrewCalendar();var theDate = new DateOnly(5776, 2, 8, hebrewCalendar); // 8 Cheshvan 5776Console.WriteLine(theDate);/* Este ejemplo produce el siguiente valor:* 10/21/2015*/✅ Ventajas El valor de la fecha no puede ser modificada por la zona horaria, lo que si ocurría con el tipo de datos DateTime.
-Al serializar un valor de tipo DateOnly serializa menos datos que el tipo DateTime.
-Este valor coincide mejor con el tipo de base de datos Date de SqlServer.
-🗒️ Ejemplos Convertir DateTime a DateOnly
-var today = DateOnly.FromDateTime(DateTime.Now);Console.WriteLine($&#34;Today is {today}&#34;);/* Este ejemplo produce el siguiente valor:* Today is 03/08/2024*/Agregar o restar días, meses o años
-var theDate = new DateOnly(2015, 10, 21);var nextDay = theDate.AddDays(1);var previousDay = theDate.AddDays(-1);var decadeLater = theDate.AddYears(10);var lastMonth = theDate.AddMonths(-1);Console.WriteLine($&#34;Date: {theDate}&#34;);Console.WriteLine($&#34; Next day: {nextDay}&#34;);Console.WriteLine($&#34; Previous day: {previousDay}&#34;);Console.WriteLine($&#34; Decade later: {decadeLater}&#34;);Console.WriteLine($&#34; Last month: {lastMonth}&#34;);/* Este ejemplo produce el siguiente valor:* Date: 10/21/2015* Next day: 10/22/2015* Previous day: 10/20/2015* Decade later: 10/21/2025* Last month: 9/21/2015*/Analizar DateOnly y darle formato
-var theDate = DateOnly.ParseExact(&#34;21 Oct 2015&#34;, &#34;dd MMM yyyy&#34;, CultureInfo.InvariantCulture); // Formato personalizadovar theDate2 = DateOnly.Parse(&#34;October 21, 2015&#34;, CultureInfo.InvariantCulture);Console.WriteLine(theDate.ToString(&#34;m&#34;, CultureInfo.InvariantCulture)); // Patrón mes díaConsole.WriteLine(theDate2.ToString(&#34;o&#34;, CultureInfo.InvariantCulture)); // Formato ISO 8601Console.WriteLine(theDate2.ToLongDateString());/* Este ejemplo produce el siguiente valor:* October 21* 2015-10-21* Wednesday, October 21, 2015*/Comparar DateOnly
-var theDate = DateOnly.ParseExact(&#34;21 Oct 2015&#34;, &#34;dd MMM yyyy&#34;, CultureInfo.InvariantCulture); // Formato personalizadovar theDate2 = DateOnly.Parse(&#34;October 21, 2015&#34;, CultureInfo.InvariantCulture);var dateLater = theDate.AddMonths(6);var dateBefore = theDate.AddDays(-10);Console.WriteLine($&#34;Consider {theDate}...&#34;);Console.WriteLine($&#34; Is &#39;{nameof(theDate2)}&#39; equal? {theDate == theDate2}&#34;);Console.WriteLine($&#34; Is {dateLater} after? {dateLater &gt; theDate} &#34;);Console.WriteLine($&#34; Is {dateLater} before? {dateLater &lt; theDate} &#34;);Console.WriteLine($&#34; Is {dateBefore} after? {dateBefore &gt; theDate} &#34;);Console.WriteLine($&#34; Is {dateBefore} before? {dateBefore &lt; theDate} &#34;);/* Este ejemplo produce el siguiente valor:* Consider 10/21/2015* Is &#39;theDate2&#39; equal? True* Is 4/21/2016 after? True* Is 4/21/2016 before? False* Is 10/11/2015 after? False* Is 10/11/2015 before? True*/🕑 TimeOnly Representa una hora del día sin fecha, cuyo valor va del 00:00:00.0000000 al 23:59:59.9999999. Antes de crearse esta estructura de datos, se solía usar TimeSpan.
-✅ Ventajas En un TimeSpan el rango superior puede superar los 29 000 años o tener valores negativos, cosa que no sucede con TimeOnly.
-Se puede establecer un valor fuera del día en el TimeSpan pero no en el TimeOnly.
-Si se usa DateTime para establecer una hora, se suele aplicar como día DateTime.MinValue y manipulando el valor puede hacer que lance una excepción del tipo OutOfRange.
-Con TimeOnly serializa menos datos.
-🗒️ Ejemplos Convertir DateTime a DateOnly
-var now = TimeOnly.FromDateTime(DateTime.Now);Console.WriteLine($&#34;It is {now} right now&#34;);/* Este ejemplo produce el siguiente valor:* It is 2:01 PM right now*/Agregar o restar tiempo
-var theTime = new TimeOnly(7, 23, 11);var hourLater = theTime.AddHours(1);var minutesBefore = theTime.AddMinutes(-12);var secondsAfter = theTime.Add(TimeSpan.FromSeconds(10));var daysLater = theTime.Add(new TimeSpan(hours: 21, minutes: 200, seconds: 83), out int wrappedDays);var daysBehind = theTime.AddHours(-222, out int wrappedDaysFromHours);Console.WriteLine($&#34;Time: {theTime}&#34;);Console.WriteLine($&#34; Hours later: {hourLater}&#34;);Console.WriteLine($&#34; Minutes before: {minutesBefore}&#34;);Console.WriteLine($&#34; Seconds after: {secondsAfter}&#34;);Console.WriteLine($&#34; {daysLater} is the time, which is {wrappedDays} days later&#34;);Console.WriteLine($&#34; {daysBehind} is the time, which is {wrappedDaysFromHours} days prior&#34;);/* Este ejemplo produce el siguiente valor:* Time: 7:23 AM* Hours later: 8:23 AM* Minutes before: 7:11 AM* Seconds after: 7:23 AM* 7:44 AM is the time, which is 1 days later * 1:23 AM is the time, which is -9 days prior*/Analizar TimeOnly y darle formato
-var theTime = TimeOnly.ParseExact(&#34;5:00 pm&#34;, &#34;h:mm tt&#34;, CultureInfo.InvariantCulture); // Formato personalizadovar theTime2 = TimeOnly.Parse(&#34;17:30:25&#34;, CultureInfo.InvariantCulture);Console.WriteLine(theTime.ToString(&#34;o&#34;, CultureInfo.InvariantCulture)); // Formato largoConsole.WriteLine(theTime2.ToString(&#34;t&#34;, CultureInfo.InvariantCulture)); // Formato cortoConsole.WriteLine(theTime2.ToLongTimeString());/* Este ejemplo produce el siguiente valor:* 17:00:00.0000000* 17:30* 5:30:25 PM*/🈯 Serializar DateOnly y TimeOnly Con la versión .NET 7 y posteriores, se admite la serialización de estas estructuras de datos.
-sealed file record Appointment(Guid Id,string Description,DateOnly Date,TimeOnly StartTime,TimeOnly EndTime);Appointment originalAppointment = new(Id: Guid.NewGuid(),Description: &#34;Take dog to veterinarian.&#34;,Date: new DateOnly(2002, 1, 13),StartTime: new TimeOnly(5,15),EndTime: new TimeOnly(5, 45));string serialized = JsonSerializer.Serialize(originalAppointment);Console.WriteLine($&#34;Resulting JSON: {serialized}&#34;);Appointment deserializedAppointment = JsonSerializer.Deserialize&lt;Appointment&gt;(serialized)!;bool valuesAreTheSame = originalAppointment == deserializedAppointment;Console.WriteLine($&#34;&#34;&#34;Original record has the same values as the deserialized record: {valuesAreTheSame}&#34;&#34;&#34;);⚙️ Trabajar con TimeOnly y DateTime TimeOnly puede crearse a partir de un TimeSpan y convertirse en ese valor. También puede utilizarse un DateTim para crear un TimeOnly.
-var theTime = TimeOnly.FromTimeSpan(new TimeSpan(23, 59, 59));var theTimeSpan = theTime.ToTimeSpan();Console.WriteLine($&#34;Variable &#39;{nameof(theTime)}&#39; is {theTime}&#34;);Console.WriteLine($&#34;Variable &#39;{nameof(theTimeSpan)}&#39; is {theTimeSpan}&#34;);/* Este ejemplo produce el siguiente valor:* Variable &#39;theTime&#39; is 11:59 PM* Variable &#39;theTimeSpan&#39; is 23:59:59*/Creación de un DateTime a través de un TimeOnly
-var theTime = new TimeOnly(11, 25, 46); // 11:25 AM and 46 secondsvar theDate = new DateOnly(2015, 10, 21); // October 21, 2015var theDateTime = theDate.ToDateTime(theTime);var reverseTime = TimeOnly.FromDateTime(theDateTime);Console.WriteLine($&#34;Date only is {theDate}&#34;);Console.WriteLine($&#34;Time only is {theTime}&#34;);Console.WriteLine();Console.WriteLine($&#34;Combined to a DateTime type, the value is {theDateTime}&#34;);Console.WriteLine($&#34;Converted back from DateTime, the time is {reverseTime}&#34;);/* Este ejemplo produce el siguiente valor:* Date only is 10/21/2015* Time only is 11:25 AM* * Combined to a DateTime type, the value is 10/21/2015 11:25:46 AM* Converted back from DateTime, the time is 11:25 AM*/🛠️ Operadores aritméticos y comparación de TimeOnly var start = new TimeOnly(10, 12, 01); // 10:12:01 AMvar end = new TimeOnly(14, 00, 53); // 02:00:53 PMvar outside = start.AddMinutes(-3);var inside = start.AddMinutes(120);Console.WriteLine($&#34;Time starts at {start} and ends at {end}&#34;);Console.WriteLine($&#34; Is {outside} between the start and end? {outside.IsBetween(start, end)}&#34;);Console.WriteLine($&#34; Is {inside} between the start and end? {inside.IsBetween(start, end)}&#34;);Console.WriteLine($&#34; Is {start} less than {end}? {start &lt; end}&#34;);Console.WriteLine($&#34; Is {start} greater than {end}? {start &gt; end}&#34;);Console.WriteLine($&#34; Does {start} equal {end}? {start == end}&#34;);Console.WriteLine($&#34; The time between {start} and {end} is {end - start}&#34;);/* Este ejemplo produce el siguiente valor:* Time starts at 10:12 AM and ends at 2:00 PM* Is 10:09 AM between the start and end? False* Is 12:12 PM between the start and end? True* Is 10:12 AM less than 2:00 PM? True* Is 10:12 AM greater than 2:00 PM? False* Does 10:12 AM equal 2:00 PM? False* The time between 10:12 AM and 2:00 PM is 03:48:52*/🔗 Referencias Microsoft Learn">
-  <meta property="og:locale" content="es">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-10-12T07:30:17+02:00">
-    <meta property="article:modified_time" content="2025-10-12T07:30:17+02:00">
-    <meta property="article:tag" content="Tag1">
-    <meta property="article:tag" content="Tag2">
-
-
-
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Primer Articulo">
-  <meta name="twitter:description" content="DateOnly and TimeOnly DateOnly and TimeOnlyℹ️ Introducción🕑 DateOnly✅ Ventajas🗒️ Ejemplos🕑 TimeOnly✅ Ventajas🗒️ Ejemplos🈯 Serializar DateOnly y TimeOnly⚙️ Trabajar con TimeOnly y DateTime🛠️ Operadores aritméticos y comparación de TimeOnly🔗 Referenciasℹ️ Introducción Las estructuras de datos DateOnly y TimeOnly representan un dato de tipo fecha sin la hora o una hora del día sin especificar el día. Estas estructuras de datos están disponibles a partir de la versión 6 de .NET Core.
-🕑 DateOnly Representa una fecha sin hora, por lo que corresponde a un día completo. Se le puede establecer los valores del 01/01/0001 al 31/12/9999. En su constructor se le puede indicar el calendario a usar (aunque siempre se convertirá al gregoriano):
-var hebrewCalendar = new System.Globalization.HebrewCalendar();var theDate = new DateOnly(5776, 2, 8, hebrewCalendar); // 8 Cheshvan 5776Console.WriteLine(theDate);/* Este ejemplo produce el siguiente valor:* 10/21/2015*/✅ Ventajas El valor de la fecha no puede ser modificada por la zona horaria, lo que si ocurría con el tipo de datos DateTime.
-Al serializar un valor de tipo DateOnly serializa menos datos que el tipo DateTime.
-Este valor coincide mejor con el tipo de base de datos Date de SqlServer.
-🗒️ Ejemplos Convertir DateTime a DateOnly
-var today = DateOnly.FromDateTime(DateTime.Now);Console.WriteLine($&#34;Today is {today}&#34;);/* Este ejemplo produce el siguiente valor:* Today is 03/08/2024*/Agregar o restar días, meses o años
-var theDate = new DateOnly(2015, 10, 21);var nextDay = theDate.AddDays(1);var previousDay = theDate.AddDays(-1);var decadeLater = theDate.AddYears(10);var lastMonth = theDate.AddMonths(-1);Console.WriteLine($&#34;Date: {theDate}&#34;);Console.WriteLine($&#34; Next day: {nextDay}&#34;);Console.WriteLine($&#34; Previous day: {previousDay}&#34;);Console.WriteLine($&#34; Decade later: {decadeLater}&#34;);Console.WriteLine($&#34; Last month: {lastMonth}&#34;);/* Este ejemplo produce el siguiente valor:* Date: 10/21/2015* Next day: 10/22/2015* Previous day: 10/20/2015* Decade later: 10/21/2025* Last month: 9/21/2015*/Analizar DateOnly y darle formato
-var theDate = DateOnly.ParseExact(&#34;21 Oct 2015&#34;, &#34;dd MMM yyyy&#34;, CultureInfo.InvariantCulture); // Formato personalizadovar theDate2 = DateOnly.Parse(&#34;October 21, 2015&#34;, CultureInfo.InvariantCulture);Console.WriteLine(theDate.ToString(&#34;m&#34;, CultureInfo.InvariantCulture)); // Patrón mes díaConsole.WriteLine(theDate2.ToString(&#34;o&#34;, CultureInfo.InvariantCulture)); // Formato ISO 8601Console.WriteLine(theDate2.ToLongDateString());/* Este ejemplo produce el siguiente valor:* October 21* 2015-10-21* Wednesday, October 21, 2015*/Comparar DateOnly
-var theDate = DateOnly.ParseExact(&#34;21 Oct 2015&#34;, &#34;dd MMM yyyy&#34;, CultureInfo.InvariantCulture); // Formato personalizadovar theDate2 = DateOnly.Parse(&#34;October 21, 2015&#34;, CultureInfo.InvariantCulture);var dateLater = theDate.AddMonths(6);var dateBefore = theDate.AddDays(-10);Console.WriteLine($&#34;Consider {theDate}...&#34;);Console.WriteLine($&#34; Is &#39;{nameof(theDate2)}&#39; equal? {theDate == theDate2}&#34;);Console.WriteLine($&#34; Is {dateLater} after? {dateLater &gt; theDate} &#34;);Console.WriteLine($&#34; Is {dateLater} before? {dateLater &lt; theDate} &#34;);Console.WriteLine($&#34; Is {dateBefore} after? {dateBefore &gt; theDate} &#34;);Console.WriteLine($&#34; Is {dateBefore} before? {dateBefore &lt; theDate} &#34;);/* Este ejemplo produce el siguiente valor:* Consider 10/21/2015* Is &#39;theDate2&#39; equal? True* Is 4/21/2016 after? True* Is 4/21/2016 before? False* Is 10/11/2015 after? False* Is 10/11/2015 before? True*/🕑 TimeOnly Representa una hora del día sin fecha, cuyo valor va del 00:00:00.0000000 al 23:59:59.9999999. Antes de crearse esta estructura de datos, se solía usar TimeSpan.
-✅ Ventajas En un TimeSpan el rango superior puede superar los 29 000 años o tener valores negativos, cosa que no sucede con TimeOnly.
-Se puede establecer un valor fuera del día en el TimeSpan pero no en el TimeOnly.
-Si se usa DateTime para establecer una hora, se suele aplicar como día DateTime.MinValue y manipulando el valor puede hacer que lance una excepción del tipo OutOfRange.
-Con TimeOnly serializa menos datos.
-🗒️ Ejemplos Convertir DateTime a DateOnly
-var now = TimeOnly.FromDateTime(DateTime.Now);Console.WriteLine($&#34;It is {now} right now&#34;);/* Este ejemplo produce el siguiente valor:* It is 2:01 PM right now*/Agregar o restar tiempo
-var theTime = new TimeOnly(7, 23, 11);var hourLater = theTime.AddHours(1);var minutesBefore = theTime.AddMinutes(-12);var secondsAfter = theTime.Add(TimeSpan.FromSeconds(10));var daysLater = theTime.Add(new TimeSpan(hours: 21, minutes: 200, seconds: 83), out int wrappedDays);var daysBehind = theTime.AddHours(-222, out int wrappedDaysFromHours);Console.WriteLine($&#34;Time: {theTime}&#34;);Console.WriteLine($&#34; Hours later: {hourLater}&#34;);Console.WriteLine($&#34; Minutes before: {minutesBefore}&#34;);Console.WriteLine($&#34; Seconds after: {secondsAfter}&#34;);Console.WriteLine($&#34; {daysLater} is the time, which is {wrappedDays} days later&#34;);Console.WriteLine($&#34; {daysBehind} is the time, which is {wrappedDaysFromHours} days prior&#34;);/* Este ejemplo produce el siguiente valor:* Time: 7:23 AM* Hours later: 8:23 AM* Minutes before: 7:11 AM* Seconds after: 7:23 AM* 7:44 AM is the time, which is 1 days later * 1:23 AM is the time, which is -9 days prior*/Analizar TimeOnly y darle formato
-var theTime = TimeOnly.ParseExact(&#34;5:00 pm&#34;, &#34;h:mm tt&#34;, CultureInfo.InvariantCulture); // Formato personalizadovar theTime2 = TimeOnly.Parse(&#34;17:30:25&#34;, CultureInfo.InvariantCulture);Console.WriteLine(theTime.ToString(&#34;o&#34;, CultureInfo.InvariantCulture)); // Formato largoConsole.WriteLine(theTime2.ToString(&#34;t&#34;, CultureInfo.InvariantCulture)); // Formato cortoConsole.WriteLine(theTime2.ToLongTimeString());/* Este ejemplo produce el siguiente valor:* 17:00:00.0000000* 17:30* 5:30:25 PM*/🈯 Serializar DateOnly y TimeOnly Con la versión .NET 7 y posteriores, se admite la serialización de estas estructuras de datos.
-sealed file record Appointment(Guid Id,string Description,DateOnly Date,TimeOnly StartTime,TimeOnly EndTime);Appointment originalAppointment = new(Id: Guid.NewGuid(),Description: &#34;Take dog to veterinarian.&#34;,Date: new DateOnly(2002, 1, 13),StartTime: new TimeOnly(5,15),EndTime: new TimeOnly(5, 45));string serialized = JsonSerializer.Serialize(originalAppointment);Console.WriteLine($&#34;Resulting JSON: {serialized}&#34;);Appointment deserializedAppointment = JsonSerializer.Deserialize&lt;Appointment&gt;(serialized)!;bool valuesAreTheSame = originalAppointment == deserializedAppointment;Console.WriteLine($&#34;&#34;&#34;Original record has the same values as the deserialized record: {valuesAreTheSame}&#34;&#34;&#34;);⚙️ Trabajar con TimeOnly y DateTime TimeOnly puede crearse a partir de un TimeSpan y convertirse en ese valor. También puede utilizarse un DateTim para crear un TimeOnly.
-var theTime = TimeOnly.FromTimeSpan(new TimeSpan(23, 59, 59));var theTimeSpan = theTime.ToTimeSpan();Console.WriteLine($&#34;Variable &#39;{nameof(theTime)}&#39; is {theTime}&#34;);Console.WriteLine($&#34;Variable &#39;{nameof(theTimeSpan)}&#39; is {theTimeSpan}&#34;);/* Este ejemplo produce el siguiente valor:* Variable &#39;theTime&#39; is 11:59 PM* Variable &#39;theTimeSpan&#39; is 23:59:59*/Creación de un DateTime a través de un TimeOnly
-var theTime = new TimeOnly(11, 25, 46); // 11:25 AM and 46 secondsvar theDate = new DateOnly(2015, 10, 21); // October 21, 2015var theDateTime = theDate.ToDateTime(theTime);var reverseTime = TimeOnly.FromDateTime(theDateTime);Console.WriteLine($&#34;Date only is {theDate}&#34;);Console.WriteLine($&#34;Time only is {theTime}&#34;);Console.WriteLine();Console.WriteLine($&#34;Combined to a DateTime type, the value is {theDateTime}&#34;);Console.WriteLine($&#34;Converted back from DateTime, the time is {reverseTime}&#34;);/* Este ejemplo produce el siguiente valor:* Date only is 10/21/2015* Time only is 11:25 AM* * Combined to a DateTime type, the value is 10/21/2015 11:25:46 AM* Converted back from DateTime, the time is 11:25 AM*/🛠️ Operadores aritméticos y comparación de TimeOnly var start = new TimeOnly(10, 12, 01); // 10:12:01 AMvar end = new TimeOnly(14, 00, 53); // 02:00:53 PMvar outside = start.AddMinutes(-3);var inside = start.AddMinutes(120);Console.WriteLine($&#34;Time starts at {start} and ends at {end}&#34;);Console.WriteLine($&#34; Is {outside} between the start and end? {outside.IsBetween(start, end)}&#34;);Console.WriteLine($&#34; Is {inside} between the start and end? {inside.IsBetween(start, end)}&#34;);Console.WriteLine($&#34; Is {start} less than {end}? {start &lt; end}&#34;);Console.WriteLine($&#34; Is {start} greater than {end}? {start &gt; end}&#34;);Console.WriteLine($&#34; Does {start} equal {end}? {start == end}&#34;);Console.WriteLine($&#34; The time between {start} and {end} is {end - start}&#34;);/* Este ejemplo produce el siguiente valor:* Time starts at 10:12 AM and ends at 2:00 PM* Is 10:09 AM between the start and end? False* Is 12:12 PM between the start and end? True* Is 10:12 AM less than 2:00 PM? True* Is 10:12 AM greater than 2:00 PM? False* Does 10:12 AM equal 2:00 PM? False* The time between 10:12 AM and 2:00 PM is 03:48:52*/🔗 Referencias Microsoft Learn">
-
-
-
-
-  
-
-<link rel="stylesheet" href="/Portfolio/css/output.min.css" />
-
-
-
-
-    
-
-
-<style>
-  pre {
-    padding: 1em;
-    overflow: auto;
-  }
-</style>
-
-
-
-
-
-
-
-
-
-    
-
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js" integrity="sha256-4EHxtjnR5rL8JzbY12OKQJr81ESm7JBEb49ORPo29AY=" crossorigin="anonymous"></script>
-  </head>
-
-  <body x-data="{
-    flip: false,
-  }">
-    
-    <div id="dream-global-bg"></div>
-
-    
-<nav class="mt-4 lg:mt-8 py-4">
-
-  
-  <div class="container flex justify-between px-4">
-  
-    <section class="flex items-center gap-4">
-      <div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title="Flip it!">
-        <div class="h-10 rounded-full">
-          <img src="/Portfolio/" alt="" />
-        </div>
-      </div>
-
-      
-    </section>
-
-    
-    
-
-    <div class="dropdown dropdown-end sm:hidden">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
-        <ion-icon name="menu" class="text-2xl"></ion-icon>
-      </div>
-      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/Portfolio/posts" title="Archives">
-    <ion-icon name="archive"></ion-icon>
-    Archives
-  </a>
-</li>
-
-
-
-
-<li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/Portfolio/categories" title="All Categories">
-    <ion-icon name="grid"></ion-icon>
-    All Categories
-  </a>
-</li>
-
-
-
-
-<li>
-  <a class="inline-flex items-center p-2 cursor-pointer" href="/Portfolio/tags" title="All Tags">
-    <ion-icon name="pricetags"></ion-icon>
-    All Tags
-  </a>
-</li>
-
-
-
-
-
-
-      </ul>
-    </div>
-    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
-      
-
-      
-      
-
-
-
-
-
-      
-      
-
-
-
-
-
-      
-      
-
-
-
-
-
-      
-      
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/Portfolio/posts" title="Archives">
-  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
-</a>
-
-
-      
-      
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/Portfolio/categories" title="All Categories">
-  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
-</a>
-
-
-      
-      
-<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/Portfolio/tags" title="All Tags">
-  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
-</a>
-
-
-      
-
-      
-
-      
-    </section>
-  </div>
-</nav>
-
-
-    <div class="flip-container" :class="{ 'flip-it': flip }">
-      <div class="flipper">
-        <div class="front">
-          <div class="container">
-            
-<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
-  <div class="hidden lg:block">
-    
-  </div>
-
-  <div class="lg:col-span-2">
-    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
-      
-  <meta itemprop="name" content="Primer Articulo">
-  <meta itemprop="description" content="DateOnly and TimeOnly DateOnly and TimeOnlyℹ️ Introducción🕑 DateOnly✅ Ventajas🗒️ Ejemplos🕑 TimeOnly✅ Ventajas🗒️ Ejemplos🈯 Serializar DateOnly y TimeOnly⚙️ Trabajar con TimeOnly y DateTime🛠️ Operadores aritméticos y comparación de TimeOnly🔗 Referenciasℹ️ Introducción Las estructuras de datos DateOnly y TimeOnly representan un dato de tipo fecha sin la hora o una hora del día sin especificar el día. Estas estructuras de datos están disponibles a partir de la versión 6 de .NET Core.
-🕑 DateOnly Representa una fecha sin hora, por lo que corresponde a un día completo. Se le puede establecer los valores del 01/01/0001 al 31/12/9999. En su constructor se le puede indicar el calendario a usar (aunque siempre se convertirá al gregoriano):
-var hebrewCalendar = new System.Globalization.HebrewCalendar();var theDate = new DateOnly(5776, 2, 8, hebrewCalendar); // 8 Cheshvan 5776Console.WriteLine(theDate);/* Este ejemplo produce el siguiente valor:* 10/21/2015*/✅ Ventajas El valor de la fecha no puede ser modificada por la zona horaria, lo que si ocurría con el tipo de datos DateTime.
-Al serializar un valor de tipo DateOnly serializa menos datos que el tipo DateTime.
-Este valor coincide mejor con el tipo de base de datos Date de SqlServer.
-🗒️ Ejemplos Convertir DateTime a DateOnly
-var today = DateOnly.FromDateTime(DateTime.Now);Console.WriteLine($&#34;Today is {today}&#34;);/* Este ejemplo produce el siguiente valor:* Today is 03/08/2024*/Agregar o restar días, meses o años
-var theDate = new DateOnly(2015, 10, 21);var nextDay = theDate.AddDays(1);var previousDay = theDate.AddDays(-1);var decadeLater = theDate.AddYears(10);var lastMonth = theDate.AddMonths(-1);Console.WriteLine($&#34;Date: {theDate}&#34;);Console.WriteLine($&#34; Next day: {nextDay}&#34;);Console.WriteLine($&#34; Previous day: {previousDay}&#34;);Console.WriteLine($&#34; Decade later: {decadeLater}&#34;);Console.WriteLine($&#34; Last month: {lastMonth}&#34;);/* Este ejemplo produce el siguiente valor:* Date: 10/21/2015* Next day: 10/22/2015* Previous day: 10/20/2015* Decade later: 10/21/2025* Last month: 9/21/2015*/Analizar DateOnly y darle formato
-var theDate = DateOnly.ParseExact(&#34;21 Oct 2015&#34;, &#34;dd MMM yyyy&#34;, CultureInfo.InvariantCulture); // Formato personalizadovar theDate2 = DateOnly.Parse(&#34;October 21, 2015&#34;, CultureInfo.InvariantCulture);Console.WriteLine(theDate.ToString(&#34;m&#34;, CultureInfo.InvariantCulture)); // Patrón mes díaConsole.WriteLine(theDate2.ToString(&#34;o&#34;, CultureInfo.InvariantCulture)); // Formato ISO 8601Console.WriteLine(theDate2.ToLongDateString());/* Este ejemplo produce el siguiente valor:* October 21* 2015-10-21* Wednesday, October 21, 2015*/Comparar DateOnly
-var theDate = DateOnly.ParseExact(&#34;21 Oct 2015&#34;, &#34;dd MMM yyyy&#34;, CultureInfo.InvariantCulture); // Formato personalizadovar theDate2 = DateOnly.Parse(&#34;October 21, 2015&#34;, CultureInfo.InvariantCulture);var dateLater = theDate.AddMonths(6);var dateBefore = theDate.AddDays(-10);Console.WriteLine($&#34;Consider {theDate}...&#34;);Console.WriteLine($&#34; Is &#39;{nameof(theDate2)}&#39; equal? {theDate == theDate2}&#34;);Console.WriteLine($&#34; Is {dateLater} after? {dateLater &gt; theDate} &#34;);Console.WriteLine($&#34; Is {dateLater} before? {dateLater &lt; theDate} &#34;);Console.WriteLine($&#34; Is {dateBefore} after? {dateBefore &gt; theDate} &#34;);Console.WriteLine($&#34; Is {dateBefore} before? {dateBefore &lt; theDate} &#34;);/* Este ejemplo produce el siguiente valor:* Consider 10/21/2015* Is &#39;theDate2&#39; equal? True* Is 4/21/2016 after? True* Is 4/21/2016 before? False* Is 10/11/2015 after? False* Is 10/11/2015 before? True*/🕑 TimeOnly Representa una hora del día sin fecha, cuyo valor va del 00:00:00.0000000 al 23:59:59.9999999. Antes de crearse esta estructura de datos, se solía usar TimeSpan.
-✅ Ventajas En un TimeSpan el rango superior puede superar los 29 000 años o tener valores negativos, cosa que no sucede con TimeOnly.
-Se puede establecer un valor fuera del día en el TimeSpan pero no en el TimeOnly.
-Si se usa DateTime para establecer una hora, se suele aplicar como día DateTime.MinValue y manipulando el valor puede hacer que lance una excepción del tipo OutOfRange.
-Con TimeOnly serializa menos datos.
-🗒️ Ejemplos Convertir DateTime a DateOnly
-var now = TimeOnly.FromDateTime(DateTime.Now);Console.WriteLine($&#34;It is {now} right now&#34;);/* Este ejemplo produce el siguiente valor:* It is 2:01 PM right now*/Agregar o restar tiempo
-var theTime = new TimeOnly(7, 23, 11);var hourLater = theTime.AddHours(1);var minutesBefore = theTime.AddMinutes(-12);var secondsAfter = theTime.Add(TimeSpan.FromSeconds(10));var daysLater = theTime.Add(new TimeSpan(hours: 21, minutes: 200, seconds: 83), out int wrappedDays);var daysBehind = theTime.AddHours(-222, out int wrappedDaysFromHours);Console.WriteLine($&#34;Time: {theTime}&#34;);Console.WriteLine($&#34; Hours later: {hourLater}&#34;);Console.WriteLine($&#34; Minutes before: {minutesBefore}&#34;);Console.WriteLine($&#34; Seconds after: {secondsAfter}&#34;);Console.WriteLine($&#34; {daysLater} is the time, which is {wrappedDays} days later&#34;);Console.WriteLine($&#34; {daysBehind} is the time, which is {wrappedDaysFromHours} days prior&#34;);/* Este ejemplo produce el siguiente valor:* Time: 7:23 AM* Hours later: 8:23 AM* Minutes before: 7:11 AM* Seconds after: 7:23 AM* 7:44 AM is the time, which is 1 days later * 1:23 AM is the time, which is -9 days prior*/Analizar TimeOnly y darle formato
-var theTime = TimeOnly.ParseExact(&#34;5:00 pm&#34;, &#34;h:mm tt&#34;, CultureInfo.InvariantCulture); // Formato personalizadovar theTime2 = TimeOnly.Parse(&#34;17:30:25&#34;, CultureInfo.InvariantCulture);Console.WriteLine(theTime.ToString(&#34;o&#34;, CultureInfo.InvariantCulture)); // Formato largoConsole.WriteLine(theTime2.ToString(&#34;t&#34;, CultureInfo.InvariantCulture)); // Formato cortoConsole.WriteLine(theTime2.ToLongTimeString());/* Este ejemplo produce el siguiente valor:* 17:00:00.0000000* 17:30* 5:30:25 PM*/🈯 Serializar DateOnly y TimeOnly Con la versión .NET 7 y posteriores, se admite la serialización de estas estructuras de datos.
-sealed file record Appointment(Guid Id,string Description,DateOnly Date,TimeOnly StartTime,TimeOnly EndTime);Appointment originalAppointment = new(Id: Guid.NewGuid(),Description: &#34;Take dog to veterinarian.&#34;,Date: new DateOnly(2002, 1, 13),StartTime: new TimeOnly(5,15),EndTime: new TimeOnly(5, 45));string serialized = JsonSerializer.Serialize(originalAppointment);Console.WriteLine($&#34;Resulting JSON: {serialized}&#34;);Appointment deserializedAppointment = JsonSerializer.Deserialize&lt;Appointment&gt;(serialized)!;bool valuesAreTheSame = originalAppointment == deserializedAppointment;Console.WriteLine($&#34;&#34;&#34;Original record has the same values as the deserialized record: {valuesAreTheSame}&#34;&#34;&#34;);⚙️ Trabajar con TimeOnly y DateTime TimeOnly puede crearse a partir de un TimeSpan y convertirse en ese valor. También puede utilizarse un DateTim para crear un TimeOnly.
-var theTime = TimeOnly.FromTimeSpan(new TimeSpan(23, 59, 59));var theTimeSpan = theTime.ToTimeSpan();Console.WriteLine($&#34;Variable &#39;{nameof(theTime)}&#39; is {theTime}&#34;);Console.WriteLine($&#34;Variable &#39;{nameof(theTimeSpan)}&#39; is {theTimeSpan}&#34;);/* Este ejemplo produce el siguiente valor:* Variable &#39;theTime&#39; is 11:59 PM* Variable &#39;theTimeSpan&#39; is 23:59:59*/Creación de un DateTime a través de un TimeOnly
-var theTime = new TimeOnly(11, 25, 46); // 11:25 AM and 46 secondsvar theDate = new DateOnly(2015, 10, 21); // October 21, 2015var theDateTime = theDate.ToDateTime(theTime);var reverseTime = TimeOnly.FromDateTime(theDateTime);Console.WriteLine($&#34;Date only is {theDate}&#34;);Console.WriteLine($&#34;Time only is {theTime}&#34;);Console.WriteLine();Console.WriteLine($&#34;Combined to a DateTime type, the value is {theDateTime}&#34;);Console.WriteLine($&#34;Converted back from DateTime, the time is {reverseTime}&#34;);/* Este ejemplo produce el siguiente valor:* Date only is 10/21/2015* Time only is 11:25 AM* * Combined to a DateTime type, the value is 10/21/2015 11:25:46 AM* Converted back from DateTime, the time is 11:25 AM*/🛠️ Operadores aritméticos y comparación de TimeOnly var start = new TimeOnly(10, 12, 01); // 10:12:01 AMvar end = new TimeOnly(14, 00, 53); // 02:00:53 PMvar outside = start.AddMinutes(-3);var inside = start.AddMinutes(120);Console.WriteLine($&#34;Time starts at {start} and ends at {end}&#34;);Console.WriteLine($&#34; Is {outside} between the start and end? {outside.IsBetween(start, end)}&#34;);Console.WriteLine($&#34; Is {inside} between the start and end? {inside.IsBetween(start, end)}&#34;);Console.WriteLine($&#34; Is {start} less than {end}? {start &lt; end}&#34;);Console.WriteLine($&#34; Is {start} greater than {end}? {start &gt; end}&#34;);Console.WriteLine($&#34; Does {start} equal {end}? {start == end}&#34;);Console.WriteLine($&#34; The time between {start} and {end} is {end - start}&#34;);/* Este ejemplo produce el siguiente valor:* Time starts at 10:12 AM and ends at 2:00 PM* Is 10:09 AM between the start and end? False* Is 12:12 PM between the start and end? True* Is 10:12 AM less than 2:00 PM? True* Is 10:12 AM greater than 2:00 PM? False* Does 10:12 AM equal 2:00 PM? False* The time between 10:12 AM and 2:00 PM is 03:48:52*/🔗 Referencias Microsoft Learn">
-  <meta itemprop="datePublished" content="2025-10-12T07:30:17+02:00">
-  <meta itemprop="dateModified" content="2025-10-12T07:30:17+02:00">
-  <meta itemprop="wordCount" content="1217">
-  <meta itemprop="keywords" content="Tag1,Tag2">
-
-      <header>
-        <h1 itemprop="headline">Primer Articulo</h1>
-        <p class="text-sm">
-          
-            Sunday, Oct 12, 2025
-          
-
-          | <span>6 minute read</span>
-
-          
-          | <span>Updated at
-            
-              Sunday, Oct 12, 2025
-            </span>
-          
-        </p>
-
-        
-        <div class="flex justify-between">
-          
-            <div class="flex items-center">
-  
-  <span>@</span>
-  
-
-  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-  
-    
-      <span itemprop="name">Javier Cousiño</span>
-    
-  
-  </span>
-</div>
-
-          
-
-          <div class="flex items-center gap-2">
-  
-  
-
-  
-  
-  
-  
-  
-    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
-      href="https://x.com/intent/post?text=Primer%20Articulo&amp;url=https://cousigoico.github.io/Portfolio/posts/primer-articulo/" target="_blank" rel="noopener noreferrer"
-      title="Share on X">
-      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
-    </a>
-  
-    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
-      href="https://facebook.com/sharer/sharer.php?u=https://cousigoico.github.io/Portfolio/posts/primer-articulo/" target="_blank" rel="noopener noreferrer"
-      title="Share on Facebook">
-      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
-    </a>
-  
-    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
-      href="https://wa.me/?text=Primer%20Articulo%20https://cousigoico.github.io/Portfolio/posts/primer-articulo/" target="_blank" rel="noopener noreferrer"
-      title="Share on WhatsApp">
-      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
-    </a>
-  
-
-  
-  
-</div>
-
-        </div>
-      </header>
-
-      <section id="dream-single-post-content" itemprop="articleBody">
-        
-
-        <h1 id="dateonly-and-timeonly">DateOnly and TimeOnly</h1>
-<ul>
-<li><a href="#dateonly-and-timeonly">DateOnly and TimeOnly</a>
-
-<ul>
-<li><a href="#%e2%84%b9%ef%b8%8f-introducci%c3%b3n">ℹ️ Introducción</a>
-
-<ul>
-<li><a href="#-dateonly">🕑 DateOnly</a>
-
-<ul>
-<li><a href="#-ventajas">✅ Ventajas</a>
-</li>
-<li><a href="#%ef%b8%8f-ejemplos">🗒️ Ejemplos</a>
-</li>
-</ul>
-</li>
-<li><a href="#-timeonly">🕑 TimeOnly</a>
-
-<ul>
-<li><a href="#-ventajas-1">✅ Ventajas</a>
-</li>
-<li><a href="#%ef%b8%8f-ejemplos-1">🗒️ Ejemplos</a>
-</li>
-</ul>
-</li>
-<li><a href="#-serializar-dateonly-y-timeonly">🈯 Serializar DateOnly y TimeOnly</a>
-</li>
-<li><a href="#%ef%b8%8f-trabajar-con-timeonly-y-datetime">⚙️ Trabajar con TimeOnly y DateTime</a>
-</li>
-<li><a href="#%ef%b8%8f-operadores-aritm%c3%a9ticos-y-comparaci%c3%b3n-de-timeonly">🛠️ Operadores aritméticos y comparación de TimeOnly</a>
-</li>
-</ul>
-</li>
-<li><a href="#-referencias">🔗 Referencias</a>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="ℹ-introducción">ℹ️ Introducción</h2>
-<p>Las estructuras de datos <strong>DateOnly</strong> y <strong>TimeOnly</strong> representan un dato de tipo fecha sin la hora o una hora del día sin especificar el día. Estas estructuras de datos están disponibles a partir de la versión 6 de .NET Core.</p>
-<h3 id="-dateonly">🕑 DateOnly</h3>
-<p>Representa una fecha sin hora, por lo que corresponde a un día completo. Se le puede establecer los valores del 01/01/0001 al 31/12/9999. En su constructor se le puede indicar el calendario a usar (aunque siempre se convertirá al gregoriano):</p>
-<pre><code>    var hebrewCalendar = new System.Globalization.HebrewCalendar();
-    var theDate = new DateOnly(5776, 2, 8, hebrewCalendar); // 8 Cheshvan 5776
-
-    Console.WriteLine(theDate);
-
-    /* Este ejemplo produce el siguiente valor:
-    * 10/21/2015
-    */
-</code></pre>
-<h4 id="-ventajas">✅ Ventajas</h4>
-<ul>
-<li>
-<p>El valor de la fecha no puede ser modificada por la zona horaria, lo que si ocurría con el tipo de datos <strong>DateTime</strong>.</p>
-</li>
-<li>
-<p>Al serializar un valor de tipo <strong>DateOnly</strong> serializa menos datos que el tipo <strong>DateTime</strong>.</p>
-</li>
-<li>
-<p>Este valor coincide mejor con el tipo de base de datos <strong>Date</strong> de SqlServer.</p>
-</li>
-</ul>
-<h4 id="-ejemplos">🗒️ Ejemplos</h4>
-<ul>
-<li>
-<p>Convertir DateTime a DateOnly</p>
-<pre><code>var today = DateOnly.FromDateTime(DateTime.Now);
-Console.WriteLine($&quot;Today is {today}&quot;);
-
-/* Este ejemplo produce el siguiente valor:
-* Today is 03/08/2024
-*/
-</code></pre>
-</li>
-<li>
-<p>Agregar o restar días, meses o años</p>
-<pre><code>var theDate = new DateOnly(2015, 10, 21);
-
-var nextDay = theDate.AddDays(1);
-var previousDay = theDate.AddDays(-1);
-var decadeLater = theDate.AddYears(10);
-var lastMonth = theDate.AddMonths(-1);
-
-Console.WriteLine($&quot;Date: {theDate}&quot;);
-Console.WriteLine($&quot; Next day: {nextDay}&quot;);
-Console.WriteLine($&quot; Previous day: {previousDay}&quot;);
-Console.WriteLine($&quot; Decade later: {decadeLater}&quot;);
-Console.WriteLine($&quot; Last month: {lastMonth}&quot;);
-
-/* Este ejemplo produce el siguiente valor:
-* Date: 10/21/2015
-*  Next day: 10/22/2015
-*  Previous day: 10/20/2015
-*  Decade later: 10/21/2025
-*  Last month: 9/21/2015
-*/
-</code></pre>
-</li>
-<li>
-<p>Analizar DateOnly y darle formato</p>
-<pre><code>var theDate = DateOnly.ParseExact(&quot;21 Oct 2015&quot;, &quot;dd MMM yyyy&quot;, CultureInfo.InvariantCulture);  // Formato personalizado
-var theDate2 = DateOnly.Parse(&quot;October 21, 2015&quot;, CultureInfo.InvariantCulture);
-
-Console.WriteLine(theDate.ToString(&quot;m&quot;, CultureInfo.InvariantCulture));     // Patrón mes día
-Console.WriteLine(theDate2.ToString(&quot;o&quot;, CultureInfo.InvariantCulture));    // Formato ISO 8601
-Console.WriteLine(theDate2.ToLongDateString());
-
-/* Este ejemplo produce el siguiente valor:
-* October 21
-* 2015-10-21
-* Wednesday, October 21, 2015
-*/
-</code></pre>
-</li>
-<li>
-<p>Comparar DateOnly</p>
-<pre><code>var theDate = DateOnly.ParseExact(&quot;21 Oct 2015&quot;, &quot;dd MMM yyyy&quot;, CultureInfo.InvariantCulture);  // Formato personalizado
-var theDate2 = DateOnly.Parse(&quot;October 21, 2015&quot;, CultureInfo.InvariantCulture);
-var dateLater = theDate.AddMonths(6);
-var dateBefore = theDate.AddDays(-10);
-
-Console.WriteLine($&quot;Consider {theDate}...&quot;);
-Console.WriteLine($&quot; Is '{nameof(theDate2)}' equal? {theDate == theDate2}&quot;);
-Console.WriteLine($&quot; Is {dateLater} after? {dateLater &gt; theDate} &quot;);
-Console.WriteLine($&quot; Is {dateLater} before? {dateLater &lt; theDate} &quot;);
-Console.WriteLine($&quot; Is {dateBefore} after? {dateBefore &gt; theDate} &quot;);
-Console.WriteLine($&quot; Is {dateBefore} before? {dateBefore &lt; theDate} &quot;);
-
-/* Este ejemplo produce el siguiente valor:
-* Consider 10/21/2015
-*  Is 'theDate2' equal? True
-*  Is 4/21/2016 after? True
-*  Is 4/21/2016 before? False
-*  Is 10/11/2015 after? False
-*  Is 10/11/2015 before? True
-*/
-</code></pre>
-</li>
-</ul>
-<h3 id="-timeonly">🕑 TimeOnly</h3>
-<p>Representa una hora del día sin fecha, cuyo valor va del 00:00:00.0000000 al 23:59:59.9999999. Antes de crearse esta estructura de datos, se solía usar <strong>TimeSpan</strong>.</p>
-<h4 id="-ventajas-1">✅ Ventajas</h4>
-<ul>
-<li>
-<p>En un <strong>TimeSpan</strong> el rango superior puede superar los 29 000 años o tener valores negativos, cosa que no sucede con <strong>TimeOnly</strong>.</p>
-</li>
-<li>
-<p>Se puede establecer un valor fuera del día en el <strong>TimeSpan</strong> pero no en el <strong>TimeOnly</strong>.</p>
-</li>
-<li>
-<p>Si se usa <strong>DateTime</strong> para establecer una hora, se suele aplicar como día <strong>DateTime.MinValue</strong> y manipulando el valor puede hacer que lance una excepción del tipo <strong>OutOfRange</strong>.</p>
-</li>
-<li>
-<p>Con <em>TimeOnly</em> serializa menos datos.</p>
-</li>
-</ul>
-<h4 id="-ejemplos-1">🗒️ Ejemplos</h4>
-<ul>
-<li>
-<p>Convertir <strong>DateTime</strong> a <strong>DateOnly</strong></p>
-<pre><code>var now = TimeOnly.FromDateTime(DateTime.Now);
-Console.WriteLine($&quot;It is {now} right now&quot;);
-
-/* Este ejemplo produce el siguiente valor:
-* It is 2:01 PM right now
-*/
-</code></pre>
-</li>
-<li>
-<p>Agregar o restar tiempo</p>
-<pre><code>var theTime = new TimeOnly(7, 23, 11);
-
-var hourLater = theTime.AddHours(1);
-var minutesBefore = theTime.AddMinutes(-12);
-var secondsAfter = theTime.Add(TimeSpan.FromSeconds(10));
-var daysLater = theTime.Add(new TimeSpan(hours: 21, minutes: 200, seconds: 83), out int wrappedDays);
-var daysBehind = theTime.AddHours(-222, out int wrappedDaysFromHours);
-
-Console.WriteLine($&quot;Time: {theTime}&quot;);
-Console.WriteLine($&quot; Hours later: {hourLater}&quot;);
-Console.WriteLine($&quot; Minutes before: {minutesBefore}&quot;);
-Console.WriteLine($&quot; Seconds after: {secondsAfter}&quot;);
-Console.WriteLine($&quot; {daysLater} is the time, which is {wrappedDays} days later&quot;);
-Console.WriteLine($&quot; {daysBehind} is the time, which is {wrappedDaysFromHours} days prior&quot;);
-
-/* Este ejemplo produce el siguiente valor:
-* Time: 7:23 AM
-*  Hours later: 8:23 AM
-*  Minutes before: 7:11 AM
-*  Seconds after: 7:23 AM
-*  7:44 AM is the time, which is 1 days later 
-*  1:23 AM is the time, which is -9 days prior
-*/
-</code></pre>
-</li>
-<li>
-<p>Analizar <strong>TimeOnly</strong> y darle formato</p>
-<pre><code>var theTime = TimeOnly.ParseExact(&quot;5:00 pm&quot;, &quot;h:mm tt&quot;, CultureInfo.InvariantCulture);  // Formato personalizado
-var theTime2 = TimeOnly.Parse(&quot;17:30:25&quot;, CultureInfo.InvariantCulture);
-
-Console.WriteLine(theTime.ToString(&quot;o&quot;, CultureInfo.InvariantCulture));     // Formato largo
-Console.WriteLine(theTime2.ToString(&quot;t&quot;, CultureInfo.InvariantCulture));    // Formato corto
-Console.WriteLine(theTime2.ToLongTimeString());
-
-/* Este ejemplo produce el siguiente valor:
-* 17:00:00.0000000
-* 17:30
-* 5:30:25 PM
-*/
-</code></pre>
-</li>
-</ul>
-<h3 id="-serializar-dateonly-y-timeonly">🈯 Serializar DateOnly y TimeOnly</h3>
-<p>Con la versión .NET 7 y posteriores, se admite la serialización de estas estructuras de datos.</p>
-<pre><code>    sealed file record Appointment(
-            Guid Id,
-            string Description,
-            DateOnly Date,
-            TimeOnly StartTime,
-            TimeOnly EndTime);
-
-    Appointment originalAppointment = new(
-            Id: Guid.NewGuid(),
-            Description: &quot;Take dog to veterinarian.&quot;,
-            Date: new DateOnly(2002, 1, 13),
-            StartTime: new TimeOnly(5,15),
-            EndTime: new TimeOnly(5, 45));
-    string serialized = JsonSerializer.Serialize(originalAppointment);
-
-    Console.WriteLine($&quot;Resulting JSON: {serialized}&quot;);
-
-    Appointment deserializedAppointment = JsonSerializer.Deserialize&lt;Appointment&gt;(serialized)!;
-
-    bool valuesAreTheSame = originalAppointment == deserializedAppointment;
-    Console.WriteLine($&quot;&quot;&quot;Original record has the same values as the deserialized record: {valuesAreTheSame}&quot;&quot;&quot;);
-</code></pre>
-<h3 id="-trabajar-con-timeonly-y-datetime">⚙️ Trabajar con TimeOnly y DateTime</h3>
-<p><strong>TimeOnly</strong> puede crearse a partir de un <strong>TimeSpan</strong> y convertirse en ese valor. También puede utilizarse un <strong>DateTim</strong> para crear un <strong>TimeOnly</strong>.</p>
-<pre><code>    var theTime = TimeOnly.FromTimeSpan(new TimeSpan(23, 59, 59));
-    var theTimeSpan = theTime.ToTimeSpan();
-
-    Console.WriteLine($&quot;Variable '{nameof(theTime)}' is {theTime}&quot;);
-    Console.WriteLine($&quot;Variable '{nameof(theTimeSpan)}' is {theTimeSpan}&quot;);
-
-    /* Este ejemplo produce el siguiente valor:
-    * Variable 'theTime' is 11:59 PM
-    * Variable 'theTimeSpan' is 23:59:59
-    */
-</code></pre>
-<p>Creación de un <strong>DateTime</strong> a través de un <strong>TimeOnly</strong></p>
-<pre><code>    var theTime = new TimeOnly(11, 25, 46);   // 11:25 AM and 46 seconds
-    var theDate = new DateOnly(2015, 10, 21); // October 21, 2015
-    var theDateTime = theDate.ToDateTime(theTime);
-    var reverseTime = TimeOnly.FromDateTime(theDateTime);
-
-    Console.WriteLine($&quot;Date only is {theDate}&quot;);
-    Console.WriteLine($&quot;Time only is {theTime}&quot;);
-    Console.WriteLine();
-    Console.WriteLine($&quot;Combined to a DateTime type, the value is {theDateTime}&quot;);
-    Console.WriteLine($&quot;Converted back from DateTime, the time is {reverseTime}&quot;);
-
-    /* Este ejemplo produce el siguiente valor:
-    * Date only is 10/21/2015
-    * Time only is 11:25 AM
-    * 
-    * Combined to a DateTime type, the value is 10/21/2015 11:25:46 AM
-    * Converted back from DateTime, the time is 11:25 AM
-    */
-</code></pre>
-<h3 id="-operadores-aritméticos-y-comparación-de-timeonly">🛠️ Operadores aritméticos y comparación de TimeOnly</h3>
-<pre><code>    var start = new TimeOnly(10, 12, 01); // 10:12:01 AM
-    var end = new TimeOnly(14, 00, 53); // 02:00:53 PM
-
-    var outside = start.AddMinutes(-3);
-    var inside = start.AddMinutes(120);
-
-    Console.WriteLine($&quot;Time starts at {start} and ends at {end}&quot;);
-    Console.WriteLine($&quot; Is {outside} between the start and end? {outside.IsBetween(start, end)}&quot;);
-    Console.WriteLine($&quot; Is {inside} between the start and end? {inside.IsBetween(start, end)}&quot;);
-    Console.WriteLine($&quot; Is {start} less than {end}? {start &lt; end}&quot;);
-    Console.WriteLine($&quot; Is {start} greater than {end}? {start &gt; end}&quot;);
-    Console.WriteLine($&quot; Does {start} equal {end}? {start == end}&quot;);
-    Console.WriteLine($&quot; The time between {start} and {end} is {end - start}&quot;);
-
-    /* Este ejemplo produce el siguiente valor:
-    * Time starts at 10:12 AM and ends at 2:00 PM
-    *  Is 10:09 AM between the start and end? False
-    *  Is 12:12 PM between the start and end? True
-    *  Is 10:12 AM less than 2:00 PM? True
-    *  Is 10:12 AM greater than 2:00 PM? False
-    *  Does 10:12 AM equal 2:00 PM? False
-    *  The time between 10:12 AM and 2:00 PM is 03:48:52
-    */
-</code></pre>
-<h2 id="-referencias">🔗 Referencias</h2>
-<p><a href="https://learn.microsoft.com/es-es/dotnet/standard/datetime/how-to-use-dateonly-timeonly#convert-datetime-to-dateonly" target="_blank">Microsoft Learn</a>
-</p>
-<p>The remaining content of your post.</p>
-
-        
-      </section>
-
-      
-
-      
-    </article>
-  </div>
-
-  <div
-    x-data="tocHighlighter()"
-    @scroll.window="debouncedScroll"
-    class="hidden lg:flex lg:flex-col lg:items-end"
-  >
-    
-  </div>
-</div>
-
-
-            
-<footer class="flex justify-between items-center gap-2 px-4 py-12">
-
-  <div>
-  
-  <p>© 2026 Mi Blog Técnico</p>
-  
-
-  
-  <p class="text-sm">
-    🌱
-    <span class="text-base-content/60">
-      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
-      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
-    >
-  </p>
-  
-</div>
-
-  <div
-  x-data="{ icons: [
-    { name: 'sunny', status: 'n' },
-    { name: 'moon', status: 'y' },
-    { name: 'desktop', status: 'auto' }
-  ] }"
-  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
->
-  <template x-for="icon in icons">
-    <div
-      role="button"
-      tabindex="0"
-      :aria-label="'Select ' + icon.name + ' mode'"
-      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
-      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
-      @click="$store.darkMode.toggle(icon.status)"
-    >
-      <ion-icon
-        :name="`${icon.name}-outline`"
-        class="group-hover:text-primary-content"
-        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
-      >
-      </ion-icon>
-    </div>
-  </template>
-</div>
-
-</footer>
-
-          </div>
-        </div>
-        <div class="back">
-          <div class="container">
-            
-            <div class="dream-grid dream-grid-about">
-  
-
-  
-
-  
-</div>
-
-            
-
-            
-<footer class="flex justify-between items-center gap-2 px-4 py-12">
-
-  <div>
-  
-  <p>© 2026 Mi Blog Técnico</p>
-  
-
-  
-  <p class="text-sm">
-    🌱
-    <span class="text-base-content/60">
-      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
-      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
-    >
-  </p>
-  
-</div>
-
-  <div
-  x-data="{ icons: [
-    { name: 'sunny', status: 'n' },
-    { name: 'moon', status: 'y' },
-    { name: 'desktop', status: 'auto' }
-  ] }"
-  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
->
-  <template x-for="icon in icons">
-    <div
-      role="button"
-      tabindex="0"
-      :aria-label="'Select ' + icon.name + ' mode'"
-      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
-      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
-      @click="$store.darkMode.toggle(icon.status)"
-    >
-      <ion-icon
-        :name="`${icon.name}-outline`"
-        class="group-hover:text-primary-content"
-        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
-      >
-      </ion-icon>
-    </div>
-  </template>
-</div>
-
-</footer>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-  window.lightTheme =  null 
-  window.darkTheme =  null 
-</script>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
-
-  
-  
-    
-  
-  <script src="/Portfolio/js/grid.min.js"></script>
-
-
-
-
-  
-
-<script src="/Portfolio/js/main.min.js"></script>
-
-    
-
-
-
-
-
-
-
-  
-
-<script src="/Portfolio/js/toc.min.js"></script>
-
-
-
-
-
-
-
-    
-
-    
-
-    
-
-    
-
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js" integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin="anonymous"></script>
-    <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js" integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin="anonymous"></script>
-  </body>
-</html>
