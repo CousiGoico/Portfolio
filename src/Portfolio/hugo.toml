@@ -7,6 +7,7 @@ themesDir = "../../themes"
 [params]
   author = "Fco. Javier Cousiño"
   avatar = "img/Icono.png"
+  favicon = "img/Icono.png"
   defaultTheme = "auto"
   ShowReadingTime = true
   ShowShareButtons = false
