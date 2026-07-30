@@ -1,6 +1,6 @@
 ---
 title: "Guía Completa: Crear un Bot de Telegram con C# (.NET)"
-date: 2026-05-03
+date: 2026-05-03T00:00:00+00:00
 cover: /img/telegram-logo.webp
 ---
 
