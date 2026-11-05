@@ -1,0 +1,159 @@
+<!doctype html><html lang=es x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>YAML - Fundamentos y sintaxis | Mi Blog Técnico</title><link href=/Portfolio/img/Icono.png rel=icon type=image/x-icon><link rel=canonical href=https://cousigoico.github.io/Portfolio/posts/yml/yaml/><meta name=author content="Fco. Javier Cousiño"><meta name=description content="Indice ¿Qué es YAML? Características básicas Tipos de datos Estructuras de datos Comentarios Casos de uso Buenas prácticas Referencias ¿Qué es YAML? YAML (acrónimo recursivo de YAML Ain&rsquo;t Markup Language) es un formato de serialización de datos legible por humanos. Se utiliza ampliamente en ficheros de configuración, en pipelines de CI/CD y en herramientas de infraestructura como código.
+Los archivos YAML tienen extensión .yaml o .yml y son ampliamente usados en herramientas como Docker, Kubernetes, GitHub Actions, Azure DevOps, Ansible, entre muchas otras.
+"><meta name=keywords content="YAML,YML,Configuracion,DevOps"><meta name=generator content="Hugo 0.169.0"><meta property="og:url" content="https://cousigoico.github.io/Portfolio/posts/yml/yaml/"><meta property="og:site_name" content="Mi Blog Técnico"><meta property="og:title" content="YAML - Fundamentos y sintaxis"><meta property="og:description" content="Indice ¿Qué es YAML? Características básicas Tipos de datos Estructuras de datos Comentarios Casos de uso Buenas prácticas Referencias ¿Qué es YAML? YAML (acrónimo recursivo de YAML Ain’t Markup Language) es un formato de serialización de datos legible por humanos. Se utiliza ampliamente en ficheros de configuración, en pipelines de CI/CD y en herramientas de infraestructura como código.
+Los archivos YAML tienen extensión .yaml o .yml y son ampliamente usados en herramientas como Docker, Kubernetes, GitHub Actions, Azure DevOps, Ansible, entre muchas otras."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-10-12T07:30:17+02:00"><meta property="article:modified_time" content="2025-10-12T07:30:17+02:00"><meta property="article:tag" content="YAML"><meta property="article:tag" content="YML"><meta property="article:tag" content="Configuracion"><meta property="article:tag" content="DevOps"><meta name=twitter:card content="summary"><meta name=twitter:title content="YAML - Fundamentos y sintaxis"><meta name=twitter:description content="Indice ¿Qué es YAML? Características básicas Tipos de datos Estructuras de datos Comentarios Casos de uso Buenas prácticas Referencias ¿Qué es YAML? YAML (acrónimo recursivo de YAML Ain’t Markup Language) es un formato de serialización de datos legible por humanos. Se utiliza ampliamente en ficheros de configuración, en pipelines de CI/CD y en herramientas de infraestructura como código.
+Los archivos YAML tienen extensión .yaml o .yml y son ampliamente usados en herramientas como Docker, Kubernetes, GitHub Actions, Azure DevOps, Ansible, entre muchas otras."><link rel=stylesheet href=/Portfolio/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-4EHxtjnR5rL8JzbY12OKQJr81ESm7JBEb49ORPo29AY=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav class="mt-4 lg:mt-8 py-4"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Voltear!><div class="h-10 rounded-full"><img src=/Portfolio/img/Icono.png alt></div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/posts title=Archivos><ion-icon name=archive></ion-icon>Archivos</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/categories title="Todas las categorías"><ion-icon name=grid></ion-icon>Todas las categorías</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/tags title="Todas las etiquetas"><ion-icon name=pricetags></ion-icon>Todas las etiquetas</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/posts title=Archivos><ion-icon class=group-hover:text-primary-content name=archive></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/categories title="Todas las categorías"><ion-icon class=group-hover:text-primary-content name=grid></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/tags title="Todas las etiquetas"><ion-icon class=group-hover:text-primary-content name=pricetags></ion-icon></a></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="YAML - Fundamentos y sintaxis"><meta itemprop=description content="Indice ¿Qué es YAML? Características básicas Tipos de datos Estructuras de datos Comentarios Casos de uso Buenas prácticas Referencias ¿Qué es YAML? YAML (acrónimo recursivo de YAML Ain’t Markup Language) es un formato de serialización de datos legible por humanos. Se utiliza ampliamente en ficheros de configuración, en pipelines de CI/CD y en herramientas de infraestructura como código.
+Los archivos YAML tienen extensión .yaml o .yml y son ampliamente usados en herramientas como Docker, Kubernetes, GitHub Actions, Azure DevOps, Ansible, entre muchas otras."><meta itemprop=datePublished content="2025-10-12T07:30:17+02:00"><meta itemprop=dateModified content="2025-10-12T07:30:17+02:00"><meta itemprop=wordCount content="603"><meta itemprop=keywords content="YAML,YML,Configuracion,DevOps"><header><h1 itemprop=headline>YAML - Fundamentos y sintaxis</h1><p class=text-sm>domingo, oct 12, 2025
+| <span>3 minutos de lectura</span>
+| <span>Actualizado en
+domingo, oct 12, 2025</span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>Fco. Javier Cousiño</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=YAML%20-%20Fundamentos%20y%20sintaxis&amp;url=https://cousigoico.github.io/Portfolio/posts/yml/yaml/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://cousigoico.github.io/Portfolio/posts/yml/yaml/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=YAML%20-%20Fundamentos%20y%20sintaxis%20https://cousigoico.github.io/Portfolio/posts/yml/yaml/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><h2 id=indice>Indice</h2><ol><li><a href=#QueEsYAML>¿Qué es YAML?</a></li><li><a href=#CaracteristicasBasicas>Características básicas</a></li><li><a href=#TiposDatos>Tipos de datos</a></li><li><a href=#EstructurasDatos>Estructuras de datos</a></li><li><a href=#Comentarios>Comentarios</a></li><li><a href=#CasosDeUso>Casos de uso</a></li><li><a href=#BuenasPracticas>Buenas prácticas</a></li><li><a href=#Referencias>Referencias</a></li></ol><h3 id=qué-es-yaml>¿Qué es YAML?</h3><p><strong>YAML</strong> (acrónimo recursivo de <em>YAML Ain&rsquo;t Markup Language</em>) es un formato de serialización de datos legible por humanos. Se utiliza ampliamente en ficheros de configuración, en pipelines de CI/CD y en herramientas de infraestructura como código.</p><p>Los archivos YAML tienen extensión <code>.yaml</code> o <code>.yml</code> y son ampliamente usados en herramientas como Docker, Kubernetes, GitHub Actions, Azure DevOps, Ansible, entre muchas otras.</p><h3 id=características-básicas>Características básicas</h3><ul><li>La extensión puede ser <code>.yaml</code> o <code>.yml</code>.</li><li>Los comentarios se añaden con el carácter <code>#</code>.</li><li>Las claves y valores se separan con el carácter <code>:</code>.</li><li>Los arrays se indican con los caracteres <code>[</code> y <code>]</code> o con guiones <code>-</code>.</li><li>Las cadenas de texto se rodean con comillas dobles <code>"cadena"</code>, aunque en muchos casos son opcionales.</li><li>La <strong>indentación</strong> es fundamental: se usan espacios (nunca tabulaciones) para indicar jerarquía.</li></ul><h3 id=tipos-de-datos>Tipos de datos</h3><h4 id=cadenas-de-texto-strings>Cadenas de texto (Strings)</h4><pre><code>    # Sin comillas (válido cuando no hay caracteres especiales)
+    nombre: Javier
+
+    # Con comillas dobles
+    nombre: &quot;Javier Cousiño&quot;
+
+    # Con comillas simples
+    mensaje: 'Hola, mundo!'
+
+    # Cadena multilínea (conserva saltos de línea)
+    descripcion: |
+      Primera línea.
+      Segunda línea.
+      Tercera línea.
+
+    # Cadena multilínea (pliega saltos de línea)
+    descripcion: &gt;
+      Esta es una cadena
+      que ocupa varias líneas
+      pero se une en una sola.
+</code></pre><h4 id=números>Números</h4><pre><code>    # Entero
+    edad: 30
+
+    # Decimal
+    precio: 19.99
+
+    # Notación científica
+    grande: 1.5e+6
+
+    # Hexadecimal
+    color: 0xFF0000
+</code></pre><h4 id=booleanos>Booleanos</h4><pre><code>    # Verdadero
+    activo: true
+    habilitado: yes
+    encendido: on
+
+    # Falso
+    activo: false
+    habilitado: no
+    encendido: off
+</code></pre><h4 id=nulos>Nulos</h4><pre><code>    valor: null
+    otro: ~
+</code></pre><h3 id=estructuras-de-datos>Estructuras de datos</h3><h4 id=mapas-objetosdiccionarios>Mapas (objetos/diccionarios)</h4><p>Un mapa asocia claves con valores:</p><pre><code>    persona:
+      nombre: Javier
+      apellido: Cousiño
+      edad: 38
+      email: &quot;javier@ejemplo.com&quot;
+</code></pre><h4 id=arrays-listas>Arrays (listas)</h4><h5 id=notación-de-bloque>Notación de bloque</h5><pre><code>    lenguajes:
+      - C#
+      - JavaScript
+      - Python
+      - Go
+</code></pre><h5 id=notación-de-flujo-inline>Notación de flujo (inline)</h5><pre><code>    lenguajes: [C#, JavaScript, Python, Go]
+</code></pre><h4 id=arrays-de-objetos>Arrays de objetos</h4><pre><code>    empleados:
+      - nombre: Ana
+        puesto: Desarrolladora
+        antiguedad: 3
+      - nombre: Carlos
+        puesto: DevOps
+        antiguedad: 5
+      - nombre: Marta
+        puesto: QA
+        antiguedad: 2
+</code></pre><h4 id=mapas-anidados>Mapas anidados</h4><pre><code>    base_datos:
+      servidor:
+        host: localhost
+        puerto: 5432
+      credenciales:
+        usuario: admin
+        contrasena: &quot;secreto&quot;
+      opciones:
+        pool_conexiones: 10
+        timeout: 30
+</code></pre><h4 id=combinación-de-mapas-y-arrays>Combinación de mapas y arrays</h4><pre><code>    microservicios:
+      - nombre: api-gateway
+        puerto: 8080
+        replicas: 3
+        variables_entorno:
+          - JWT_SECRET: &quot;mi-secreto&quot;
+          - LOG_LEVEL: info
+      - nombre: user-service
+        puerto: 8081
+        replicas: 2
+</code></pre><h3 id=comentarios>Comentarios</h3><p>Los comentarios en YAML comienzan con <code>#</code> y pueden aparecer en cualquier línea:</p><pre><code>    # Este es un comentario de bloque
+    nombre: Javier  # Este es un comentario en línea
+
+    # Configuración de la base de datos
+    base_datos:
+      host: localhost  # Cambiar en producción
+      puerto: 5432
+</code></pre><h3 id=casos-de-uso>Casos de uso</h3><h4 id=docker-compose>Docker Compose</h4><pre><code>    version: '3.8'
+    services:
+      web:
+        image: nginx:latest
+        ports:
+          - &quot;80:80&quot;
+        volumes:
+          - ./html:/usr/share/nginx/html
+      db:
+        image: postgres:15
+        environment:
+          POSTGRES_DB: mibd
+          POSTGRES_USER: usuario
+          POSTGRES_PASSWORD: contraseña
+</code></pre><h4 id=kubernetes-deployment>Kubernetes (Deployment)</h4><pre><code>    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: mi-aplicacion
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: mi-aplicacion
+      template:
+        metadata:
+          labels:
+            app: mi-aplicacion
+        spec:
+          containers:
+            - name: mi-aplicacion
+              image: mi-imagen:1.0
+              ports:
+                - containerPort: 8080
+</code></pre><h4 id=github-actions>GitHub Actions</h4><pre><code>    name: CI
+    on:
+      push:
+        branches: [main]
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v4
+          - name: Compilar
+            run: dotnet build
+</code></pre><h3 id=buenas-prácticas>Buenas prácticas</h3><ul><li>Usar siempre <strong>espacios</strong> para la indentación, nunca tabulaciones.</li><li>Mantener una <strong>indentación consistente</strong> (2 o 4 espacios).</li><li>Usar comillas para valores que contengan caracteres especiales (<code>:</code> <code>,</code> <code>[</code> <code>]</code> <code>{</code> <code>}</code> <code>#</code> <code>&</code> <code>*</code> <code>?</code> <code>|</code> <code>-</code> <code>&lt;</code> <code>></code> <code>=</code> <code>!</code> <code>%</code> <code>@</code> <code>`</code>).</li><li>Añadir comentarios para explicar configuraciones no obvias.</li><li>Validar los archivos YAML con herramientas como <a href=https://www.yamllint.com/ target=_blank>YAML Lint</a>
+antes de usarlos en producción.</li><li>Evitar anclas y alias si no son necesarios, ya que pueden dificultar la lectura.</li></ul><h3 id=referencias>Referencias</h3><ul><li><a href=https://yaml.org/spec/ target=_blank>Especificación oficial de YAML</a></li><li><a href=https://www.yamllint.com/ target=_blank>YAML Lint - Validador online</a></li><li><a href=https://docs.docker.com/compose/ target=_blank>Documentación de Docker Compose</a></li><li><a href=https://kubernetes.io/es/docs/concepts/overview/ target=_blank>Documentación de Kubernetes</a></li><li><a href=https://docs.github.com/es/actions/writing-workflows/workflow-syntax-for-github-actions target=_blank>Sintaxis de GitHub Actions</a></li></ul></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2026 Mi Blog Técnico</p><p class=text-sm>🌱
+<span class=text-base-content/60>Powered by <a class=hover:underline href=https://gohugo.io/ target=_blank>Hugo</a> with theme
+<a class=hover:underline href=https://github.com/g1eny0ung/hugo-theme-dream target=_blank>Dream</a>.</span></p></div><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2026 Mi Blog Técnico</p><p class=text-sm>🌱
+<span class=text-base-content/60>Powered by <a class=hover:underline href=https://gohugo.io/ target=_blank>Hugo</a> with theme
+<a class=hover:underline href=https://github.com/g1eny0ung/hugo-theme-dream target=_blank>Dream</a>.</span></p></div><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme=null,window.darkTheme=null</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/Portfolio/js/grid.min.js></script><script src=/Portfolio/js/main.min.js></script><script src=/Portfolio/js/toc.min.js></script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

@@ -1,0 +1,104 @@
+<!doctype html><html lang=es x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>C# 12 - Nuevas funcionalidades | Mi Blog Técnico</title><link href=/Portfolio/img/Icono.png rel=icon type=image/x-icon><link rel=canonical href=https://cousigoico.github.io/Portfolio/posts/dotnet/csharp-12/><meta name=author content="Fco. Javier Cousiño"><meta name=description content='Nuevas funcionalidades Constructores primarios Te permite crear propiedades en una clase desde la línea de construcción de un objeto.
+Código convencional:
+public class Student { #region Properties public int Id {get;set;} public string Name {get;set;} public string Surname {get;set;} public DateTime Birthdate {get;set;} #endregion #region Builds public Student() {} public Student(string name, string surname, DateTime birthdate) { this.Name = name; this.Surname = surname; this.Birthdate = birthdate; } public Student(int id, string name, string surname, DateTime birthdate){ this.Id = id; this.Name = name; this.Surname = surname; this.Birthdate = birthdate; } #endregion #region Methods public override string ToString() { return $"{this.Name} {this.Surname}"; } #endregion } ... // En otro lugar del programa var alumno = new Student(); var alumno = new Student("Javier", "Cousiño", new DateTime(1986, 1, 5)); var alumno = new Student(24, "Javier", "Cousiño", new DateTime(1986, 1, 5)); Con los constructores primarios, quedaría tal que así:
+'><meta name=keywords content=".NET,C#"><meta name=generator content="Hugo 0.169.0"><meta property="og:url" content="https://cousigoico.github.io/Portfolio/posts/dotnet/csharp-12/"><meta property="og:site_name" content="Mi Blog Técnico"><meta property="og:title" content="C# 12 - Nuevas funcionalidades"><meta property="og:description" content='Nuevas funcionalidades Constructores primarios Te permite crear propiedades en una clase desde la línea de construcción de un objeto.
+Código convencional:
+public class Student { #region Properties public int Id {get;set;} public string Name {get;set;} public string Surname {get;set;} public DateTime Birthdate {get;set;} #endregion #region Builds public Student() {} public Student(string name, string surname, DateTime birthdate) { this.Name = name; this.Surname = surname; this.Birthdate = birthdate; } public Student(int id, string name, string surname, DateTime birthdate){ this.Id = id; this.Name = name; this.Surname = surname; this.Birthdate = birthdate; } #endregion #region Methods public override string ToString() { return $"{this.Name} {this.Surname}"; } #endregion } ... // En otro lugar del programa var alumno = new Student(); var alumno = new Student("Javier", "Cousiño", new DateTime(1986, 1, 5)); var alumno = new Student(24, "Javier", "Cousiño", new DateTime(1986, 1, 5)); Con los constructores primarios, quedaría tal que así:'><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-10-12T07:30:17+02:00"><meta property="article:modified_time" content="2025-10-12T07:30:17+02:00"><meta property="article:tag" content=".NET"><meta property="article:tag" content="C#"><meta name=twitter:card content="summary"><meta name=twitter:title content="C# 12 - Nuevas funcionalidades"><meta name=twitter:description content='Nuevas funcionalidades Constructores primarios Te permite crear propiedades en una clase desde la línea de construcción de un objeto.
+Código convencional:
+public class Student { #region Properties public int Id {get;set;} public string Name {get;set;} public string Surname {get;set;} public DateTime Birthdate {get;set;} #endregion #region Builds public Student() {} public Student(string name, string surname, DateTime birthdate) { this.Name = name; this.Surname = surname; this.Birthdate = birthdate; } public Student(int id, string name, string surname, DateTime birthdate){ this.Id = id; this.Name = name; this.Surname = surname; this.Birthdate = birthdate; } #endregion #region Methods public override string ToString() { return $"{this.Name} {this.Surname}"; } #endregion } ... // En otro lugar del programa var alumno = new Student(); var alumno = new Student("Javier", "Cousiño", new DateTime(1986, 1, 5)); var alumno = new Student(24, "Javier", "Cousiño", new DateTime(1986, 1, 5)); Con los constructores primarios, quedaría tal que así:'><link rel=stylesheet href=/Portfolio/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-4EHxtjnR5rL8JzbY12OKQJr81ESm7JBEb49ORPo29AY=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav class="mt-4 lg:mt-8 py-4"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Voltear!><div class="h-10 rounded-full"><img src=/Portfolio/img/Icono.png alt></div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/posts title=Archivos><ion-icon name=archive></ion-icon>Archivos</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/categories title="Todas las categorías"><ion-icon name=grid></ion-icon>Todas las categorías</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/tags title="Todas las etiquetas"><ion-icon name=pricetags></ion-icon>Todas las etiquetas</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/posts title=Archivos><ion-icon class=group-hover:text-primary-content name=archive></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/categories title="Todas las categorías"><ion-icon class=group-hover:text-primary-content name=grid></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/tags title="Todas las etiquetas"><ion-icon class=group-hover:text-primary-content name=pricetags></ion-icon></a></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="C# 12 - Nuevas funcionalidades"><meta itemprop=description content='Nuevas funcionalidades Constructores primarios Te permite crear propiedades en una clase desde la línea de construcción de un objeto.
+Código convencional:
+public class Student { #region Properties public int Id {get;set;} public string Name {get;set;} public string Surname {get;set;} public DateTime Birthdate {get;set;} #endregion #region Builds public Student() {} public Student(string name, string surname, DateTime birthdate) { this.Name = name; this.Surname = surname; this.Birthdate = birthdate; } public Student(int id, string name, string surname, DateTime birthdate){ this.Id = id; this.Name = name; this.Surname = surname; this.Birthdate = birthdate; } #endregion #region Methods public override string ToString() { return $"{this.Name} {this.Surname}"; } #endregion } ... // En otro lugar del programa var alumno = new Student(); var alumno = new Student("Javier", "Cousiño", new DateTime(1986, 1, 5)); var alumno = new Student(24, "Javier", "Cousiño", new DateTime(1986, 1, 5)); Con los constructores primarios, quedaría tal que así:'><meta itemprop=datePublished content="2025-10-12T07:30:17+02:00"><meta itemprop=dateModified content="2025-10-12T07:30:17+02:00"><meta itemprop=wordCount content="575"><meta itemprop=keywords content=".NET,C#"><header><h1 itemprop=headline>C# 12 - Nuevas funcionalidades</h1><p class=text-sm>domingo, oct 12, 2025
+| <span>3 minutos de lectura</span>
+| <span>Actualizado en
+domingo, oct 12, 2025</span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>Fco. Javier Cousiño</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=C#%2012%20-%20Nuevas%20funcionalidades&amp;url=https://cousigoico.github.io/Portfolio/posts/dotnet/csharp-12/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://cousigoico.github.io/Portfolio/posts/dotnet/csharp-12/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=C#%2012%20-%20Nuevas%20funcionalidades%20https://cousigoico.github.io/Portfolio/posts/dotnet/csharp-12/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><h2 id=nuevas-funcionalidades>Nuevas funcionalidades</h2><h3 id=constructores-primarios>Constructores primarios</h3><p>Te permite crear propiedades en una clase desde la línea de construcción de un objeto.</p><p>Código convencional:</p><pre><code>    public class Student {
+
+        #region Properties
+
+        public int Id {get;set;}
+        public string Name {get;set;}
+        public string Surname {get;set;}
+        public DateTime Birthdate {get;set;}
+
+        #endregion
+
+        #region Builds
+
+        public Student() {}
+
+        public Student(string name, string surname, DateTime birthdate) {
+            this.Name = name;
+            this.Surname = surname;
+            this.Birthdate = birthdate;
+        }
+
+        public Student(int id, string name, string surname, DateTime birthdate){
+            this.Id = id;
+            this.Name = name;
+            this.Surname = surname;
+            this.Birthdate = birthdate;
+        } 
+
+        #endregion
+
+        #region Methods
+
+        public override string ToString() {
+            return $&quot;{this.Name} {this.Surname}&quot;;
+        }
+
+        #endregion
+
+    }
+
+    ... // En otro lugar del programa
+
+    var alumno = new Student();
+    var alumno = new Student(&quot;Javier&quot;, &quot;Cousiño&quot;, new DateTime(1986, 1, 5));
+    var alumno = new Student(24, &quot;Javier&quot;, &quot;Cousiño&quot;, new DateTime(1986, 1, 5));
+</code></pre><p>Con los constructores primarios, quedaría tal que así:</p><pre><code>    public class Student(int id, string name, string surname, DateTime birthdate)
+    {
+        public int Id =&gt; id;
+        public string Name =&gt; name;
+        public string Surname =&gt; surname;
+        public DateTime Birthdate =&gt; birthdate;
+        public override string ToString() =&gt; $&quot;{this.Name} {this.Surname}&quot;;
+    }
+</code></pre><p>También podremos usar este constructor primario desde otros constructores.</p><pre><code>    public Student():this(31, &quot;Javier&quot;, &quot;Cousiño&quot;, new DateTime(1986, 1, 5));
+</code></pre><h3 id=expresiones-de-colección>Expresiones de colección</h3><p>Son una nueva sintaxis más fácil de declarar todos los tipos de colecciones.</p><p>Antes:</p><pre><code>string[] weekDays = new string[] {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot; };
+List&lt;decimals&gt; temperatures = new () { 31.4, 26.5, 14.9 };
+</code></pre><p>Con las epxresiones de colección, tendríamos el siguiente código:</p><pre><code>string[] weekDays =[&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;];
+List&lt;decimals&gt; temperatures = [31.4, 26.5, 14.9];
+</code></pre><h3 id=alias-de-tipos-de-datos-usings>Alias de tipos de datos (usings)</h3><p>Con esta nueva funcionalidad, vas a poder poner un alias a un tipo de dato.</p><p>Ejemplo:</p><pre><code>    using DailyValues = List&lt;string, int&gt;;
+
+    DailyValues values = new DailyValues();
+    values.Add(&quot;Monday&quot;, 25);
+    values.Add(&quot;Thursday&quot;, 19);
+</code></pre><h3 id=valores-opcionales-en-lambdas>Valores opcionales en lambdas</h3><p>Ahora se puede establecer valores opcionales a los argumentos de las funciones lambda:</p><pre><code>    var completePhone = (string phone, string prefix = &quot;+34&quot;) =&gt; $&quot;{prefix} {phone}&quot;; 
+</code></pre><h3 id=nuevo-modificador-ref-readonly>Nuevo modificador <em>ref readonly</em></h3><p>Ahora se puede usar este nuevo modificador para indicar que el parámetro será por referencia y no se podrá modificar.</p><pre><code>    public decimal Calc (int a, ref readonly int b) {
+        return a + b;
+    }
+</code></pre><h3 id=inlinearray>InlineArray</h3><p>Este atributo permite definir una secuencia de primitivos. Aplica el tamaño del array a la hora de compilar, no de instanciar el array.</p><pre><code>    [InlineArray(16)]
+    public struct Students {
+        private int _studentsNum;
+    }
+
+    Students list = new Students();
+    list[0] = 12;
+    list[1] = 9;
+</code></pre><h3 id=experimentalattribute><em>ExperimentalAttribute</em></h3><p>Con este nuevo atributo, podrás indicar que cierta clase es experimental y no está del todo probada. Cuando alguien use esa clase, el compilador le mostrará un aviso indicandolo.</p><p>Este nuevo atributo se encuentra dentro del espacio de nombres <em>System.Diagnostics.CodeAnalysis</em>.</p><h3 id=interceptores>Interceptores</h3><p>Un <em>interceptor</em> es un método que puede, de forma declarativa, sustituir una llamada a un método interceptable por una llamada a sí mismo en tiempo de compilación. Esta sustitución se produce al hacer que el interceptor declare las ubicaciones de origen de las llamadas que intercepta.</p><p>Use un interceptor como parte de un generador de origen para modificarlo, en lugar de agregar código a una compilación de origen existente. El generador de origen sustituye las llamadas a un método interceptable con una llamada al método <em>interceptor</em>.</p><p>Para usar interceptores, el proyecto de usuario debe especificar la propiedad <em>&lt; InterceptorsPreviewNamespaces ></em>. Se trata de una lista de espacios de nombres que pueden contener interceptores.</p><pre><code>    &lt;InterceptorsPreviewNamespaces&gt;$(InterceptorsPreviewNamespaces);Microsoft.AspNetCore.Http.Generated;MyLibrary.Generated&lt;/InterceptorsPreviewNamespaces&gt;
+</code></pre><h2 id=referencias>Referencias</h2><ul><li><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12 target=_blank>Microsoft Learn</a></p></li><li><p><a href=https://www.campusmvp.es/recursos/post/c-12-todo-lo-nuevo-del-lenguaje-aparecido-con-net-8.aspx target=_blank>Campus MVP</a></p></li><li><p><a href=https://www.variablenotfound.com/2024/01/constructores-primarios-en-c-12.html target=_blank>VariableNotFound</a></p></li><li><p><a href=https://www.netmentor.es/entrada/novedades-csharp12 target=_blank>NetMentor.es</a></p></li></ul></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2026 Mi Blog Técnico</p><p class=text-sm>🌱
+<span class=text-base-content/60>Powered by <a class=hover:underline href=https://gohugo.io/ target=_blank>Hugo</a> with theme
+<a class=hover:underline href=https://github.com/g1eny0ung/hugo-theme-dream target=_blank>Dream</a>.</span></p></div><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2026 Mi Blog Técnico</p><p class=text-sm>🌱
+<span class=text-base-content/60>Powered by <a class=hover:underline href=https://gohugo.io/ target=_blank>Hugo</a> with theme
+<a class=hover:underline href=https://github.com/g1eny0ung/hugo-theme-dream target=_blank>Dream</a>.</span></p></div><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme=null,window.darkTheme=null</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/Portfolio/js/grid.min.js></script><script src=/Portfolio/js/main.min.js></script><script src=/Portfolio/js/toc.min.js></script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

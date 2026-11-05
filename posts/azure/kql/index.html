@@ -1,0 +1,301 @@
+<!doctype html><html lang=es x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Kusto Query Language | Mi Blog Técnico</title><link href=/Portfolio/img/Icono.png rel=icon type=image/x-icon><link rel=canonical href=https://cousigoico.github.io/Portfolio/posts/azure/kql/><meta name=author content="Fco. Javier Cousiño"><meta name=description content="Indice ¿Qué es KQL? Instrucciones de consulta de usuario Operaciones comunes Operaciones de agregación Operaciones de condición Operaciones de unión Visualizaciones geoespaciales ¿Qué es KQL? Kusto Query Language (KQL) es un lenguaje, usado principalmente dentro de Azure, que se suele utilizar para consultar telemetría, métricas y registros con una compatibilidad profunda con la búsqueda y el análisis de texto, operadores y funciones de series temporales, análisis y agregación, geoespaciales, búsquedas de similitud vectorial y muchas otras construcciones de lenguaje que proporcionan el lenguaje más óptimo para el análisis de datos. Permite explorar los datos y descubrir patrones, identificar anomalías y valores atípicos, crear modelos estadísticos, &mldr; Es un lenguaje sencillo pero eficaz para consultar datos estructurados, semiestructurados y no estructurados. Es expresivo, fácil de leer y comprender la intención de la consulta, y está optimizado para las experiencias de creación. La consulta utiliza entidades de esquema que se organizan en una jerarquía similar a SQL.
+"><meta name=keywords content="Azure,KQL,Queries"><meta name=generator content="Hugo 0.169.0"><meta property="og:url" content="https://cousigoico.github.io/Portfolio/posts/azure/kql/"><meta property="og:site_name" content="Mi Blog Técnico"><meta property="og:title" content="Kusto Query Language"><meta property="og:description" content="Indice ¿Qué es KQL? Instrucciones de consulta de usuario Operaciones comunes Operaciones de agregación Operaciones de condición Operaciones de unión Visualizaciones geoespaciales ¿Qué es KQL? Kusto Query Language (KQL) es un lenguaje, usado principalmente dentro de Azure, que se suele utilizar para consultar telemetría, métricas y registros con una compatibilidad profunda con la búsqueda y el análisis de texto, operadores y funciones de series temporales, análisis y agregación, geoespaciales, búsquedas de similitud vectorial y muchas otras construcciones de lenguaje que proporcionan el lenguaje más óptimo para el análisis de datos. Permite explorar los datos y descubrir patrones, identificar anomalías y valores atípicos, crear modelos estadísticos, … Es un lenguaje sencillo pero eficaz para consultar datos estructurados, semiestructurados y no estructurados. Es expresivo, fácil de leer y comprender la intención de la consulta, y está optimizado para las experiencias de creación. La consulta utiliza entidades de esquema que se organizan en una jerarquía similar a SQL."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-10-12T07:30:17+02:00"><meta property="article:modified_time" content="2025-10-12T07:30:17+02:00"><meta property="article:tag" content="Azure"><meta property="article:tag" content="KQL"><meta property="article:tag" content="Queries"><meta name=twitter:card content="summary"><meta name=twitter:title content="Kusto Query Language"><meta name=twitter:description content="Indice ¿Qué es KQL? Instrucciones de consulta de usuario Operaciones comunes Operaciones de agregación Operaciones de condición Operaciones de unión Visualizaciones geoespaciales ¿Qué es KQL? Kusto Query Language (KQL) es un lenguaje, usado principalmente dentro de Azure, que se suele utilizar para consultar telemetría, métricas y registros con una compatibilidad profunda con la búsqueda y el análisis de texto, operadores y funciones de series temporales, análisis y agregación, geoespaciales, búsquedas de similitud vectorial y muchas otras construcciones de lenguaje que proporcionan el lenguaje más óptimo para el análisis de datos. Permite explorar los datos y descubrir patrones, identificar anomalías y valores atípicos, crear modelos estadísticos, … Es un lenguaje sencillo pero eficaz para consultar datos estructurados, semiestructurados y no estructurados. Es expresivo, fácil de leer y comprender la intención de la consulta, y está optimizado para las experiencias de creación. La consulta utiliza entidades de esquema que se organizan en una jerarquía similar a SQL."><link rel=stylesheet href=/Portfolio/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-4EHxtjnR5rL8JzbY12OKQJr81ESm7JBEb49ORPo29AY=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav class="mt-4 lg:mt-8 py-4"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Voltear!><div class="h-10 rounded-full"><img src=/Portfolio/img/Icono.png alt></div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/posts title=Archivos><ion-icon name=archive></ion-icon>Archivos</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/categories title="Todas las categorías"><ion-icon name=grid></ion-icon>Todas las categorías</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/tags title="Todas las etiquetas"><ion-icon name=pricetags></ion-icon>Todas las etiquetas</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/posts title=Archivos><ion-icon class=group-hover:text-primary-content name=archive></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/categories title="Todas las categorías"><ion-icon class=group-hover:text-primary-content name=grid></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/tags title="Todas las etiquetas"><ion-icon class=group-hover:text-primary-content name=pricetags></ion-icon></a></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Kusto Query Language"><meta itemprop=description content="Indice ¿Qué es KQL? Instrucciones de consulta de usuario Operaciones comunes Operaciones de agregación Operaciones de condición Operaciones de unión Visualizaciones geoespaciales ¿Qué es KQL? Kusto Query Language (KQL) es un lenguaje, usado principalmente dentro de Azure, que se suele utilizar para consultar telemetría, métricas y registros con una compatibilidad profunda con la búsqueda y el análisis de texto, operadores y funciones de series temporales, análisis y agregación, geoespaciales, búsquedas de similitud vectorial y muchas otras construcciones de lenguaje que proporcionan el lenguaje más óptimo para el análisis de datos. Permite explorar los datos y descubrir patrones, identificar anomalías y valores atípicos, crear modelos estadísticos, … Es un lenguaje sencillo pero eficaz para consultar datos estructurados, semiestructurados y no estructurados. Es expresivo, fácil de leer y comprender la intención de la consulta, y está optimizado para las experiencias de creación. La consulta utiliza entidades de esquema que se organizan en una jerarquía similar a SQL."><meta itemprop=datePublished content="2025-10-12T07:30:17+02:00"><meta itemprop=dateModified content="2025-10-12T07:30:17+02:00"><meta itemprop=wordCount content="2016"><meta itemprop=keywords content="Azure,KQL,Queries"><header><h1 itemprop=headline>Kusto Query Language</h1><p class=text-sm>domingo, oct 12, 2025
+| <span>10 minutos de lectura</span>
+| <span>Actualizado en
+domingo, oct 12, 2025</span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>Fco. Javier Cousiño</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=Kusto%20Query%20Language&amp;url=https://cousigoico.github.io/Portfolio/posts/azure/kql/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://cousigoico.github.io/Portfolio/posts/azure/kql/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=Kusto%20Query%20Language%20https://cousigoico.github.io/Portfolio/posts/azure/kql/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><h2 id=indice>Indice</h2><ol><li><a href=#KQL>¿Qué es KQL?</a></li><li><a href=#UserInstructions>Instrucciones de consulta de usuario</a></li><li><a href=#CommonOperators>Operaciones comunes</a></li><li><a href=#AgregateOperators>Operaciones de agregación</a></li><li><a href=#ConditionOperators>Operaciones de condición</a></li><li><a href=#UnionOperators>Operaciones de unión</a></li><li><a href=#GeospacialView>Visualizaciones geoespaciales</a></li></ol><h3 id=qué-es-kql>¿Qué es KQL?</h3><p>Kusto Query Language (KQL) es un lenguaje, usado principalmente dentro de Azure, que se suele utilizar para consultar telemetría, métricas y registros con una compatibilidad profunda con la búsqueda y el análisis de texto, operadores y funciones de series temporales, análisis y agregación, geoespaciales, búsquedas de similitud vectorial y muchas otras construcciones de lenguaje que proporcionan el lenguaje más óptimo para el análisis de datos. Permite explorar los datos y descubrir patrones, identificar anomalías y valores atípicos, crear modelos estadísticos, &mldr; Es un lenguaje sencillo pero eficaz para consultar datos estructurados, semiestructurados y no estructurados. Es expresivo, fácil de leer y comprender la intención de la consulta, y está optimizado para las experiencias de creación. La consulta utiliza entidades de esquema que se organizan en una jerarquía similar a SQL.</p><h4 id=qué-es-una-consulta-de-kusto>¿Qué es una consulta de Kusto?</h4><p>Una consulta de Kusto es una solicitud de solo lectura para procesar datos y devolver resultados. La solicitud se expresa en texto sin formato, utilizando un modelo de flujo de datos que es fácil de leer, crear y automatizar. Las consultas de Kusto se componen de una o varias instrucciones de consulta.</p><h3 id=instrucciones-de-consulta-de-usuario>Instrucciones de consulta de usuario</h3><h4 id=expresión-tabular>Expresión tabular</h4><p>Esta instrucción suele aparecer en último lugar en la lista de instrucciones, y tanto su entrada como su salida constan de tablas o conjuntos de datos tabulares. Dos instrucciones cualesquiera deben estar separadas por un punto y coma.</p><ul><li><p>Sintaxis:
+Source <strong>|</strong> Operator1 <strong>|</strong> Operator2 <strong>|</strong> RenderInstruction</p></li><li><p>Parámetros:</p><ul><li>Source: fuente de datos tabular.</li><li>Operator: operadores de datos tabulares, como filtros y proyecciones.</li><li>RenderInstruction: representación de operadores o instrucciones..</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents 
+  | where State == &quot;FLORIDA&quot;
+  | count
+</code></pre></li></ul><h4 id=let>Let</h4><p>Una instrucción <a href="https://learn.microsoft.com/es-es/kusto/query/let-statement?view=microsoft-fabric" target=_blank>let</a>
+define un enlace entre un nombre y una expresión.</p><ul><li><p>Sintaxis:
+<strong>let</strong> Name <strong>=</strong> Expression
+<strong>let</strong> Name <strong>=</strong> <a href=[Parameters]>view</a>
+{ FunctionBody }</p></li><li><p>Parámetros:</p><ul><li>Name: nombre de la variable de tipo texto.</li><li>Expression: expresión con un resultado escalar o tabular.</li><li>Parameters: parámetros de la función.</li><li>FunctionBody: cuerpo de la función.</li></ul></li><li><p>Ejemplos:</p><pre><code>  let place = &quot;Madrid&quot;;
+  let cutoff = ago(62d); 
+
+  let sum = (value1, value2) { value1 + value2 }
+</code></pre></li></ul><h4 id=set>Set</h4><p>Una instrucción <a href="https://learn.microsoft.com/es-es/kusto/query/set-statement?view=microsoft-fabric" target=_blank>set</a>
+se utiliza para establecer una <a href="https://learn.microsoft.com/es-es/kusto/api/rest/request-properties?view=microsoft-fabric" target=_blank>propiedad de solicitud</a>
+durante la duración de la consulta. En una consulta puede haber más de una instrucción set.</p><ul><li><p>Sintaxis:
+<strong>set</strong> OptionName [<strong>=</strong> OptionValue]</p></li><li><p>Parámetros:</p><ul><li>OptionName: nombre de la propiedad de solicitud.</li><li>OptionValue: Valor de la propiedad de solicitud.</li></ul></li><li><p>Ejemplos:</p><pre><code>  set querytrace;
+</code></pre></li></ul><h3 id=operadores-comunes>Operadores comunes</h3><h4 id=count>Count</h4><p>Se usa para encontrar el número de registros en la tabla.</p><ul><li><p>Sintaxis:
+| <strong>count</strong></p></li><li><p>Ejemplos:</p><pre><code>  StormEvents 
+  | count
+</code></pre></li></ul><h4 id=take>Take</h4><p>Se usa para obtener un número determinado de registros.</p><ul><li><p>Sintaxis:
+| <strong>take</strong> num</p></li><li><p>Parámetros:</p><ul><li>num: número determinado de registros que se desea obtener.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents 
+  | take 4
+</code></pre></li></ul><h4 id=project>Project</h4><p>Se usa para seleccionar un subconjunto específico de columnas.</p><ul><li><p>Sintaxis:
+| <strong>project</strong> [column_name]</p></li><li><p>Parámetros:</p><ul><li>[column_name]: lista de los nombres de las columnas que deseas obtener.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | take 5
+  | project State, EventType, DamageProperty
+</code></pre></li></ul><h4 id=distinct>Distinct</h4><p>Se usa para obtener los diferentes valores de una columna.</p><ul><li><p>Sintaxis:
+| <strong>distinct</strong> column_name</p></li><li><p>Parámetros:</p><ul><li>column_name: nombre de la columna de la que deseas que no se repitan los valores.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | distinct EventType
+</code></pre></li></ul><h4 id=where>Where</h4><p>Se usa para realizar filtros en la consulta.</p><ul><li><p>Sintaxis:
+| <strong>where</strong> filter</p></li><li><p>Parámetros:</p><ul><li>filter: criterio por el que realizar el filtro de datos.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | where State == 'TEXAS' and EventType == 'Flood'
+</code></pre></li></ul><h4 id=sort-by>sort by</h4><p>Se usa para ordenar los datos por una lista de columnas.</p><ul><li><p>Sintaxis:
+| <strong>sort by</strong> [column_name {asc|desc}]</p></li><li><p>Parámetros:</p><ul><li>column_name: nombre de la columna por la que se desea ordenar.</li><li>asc|desc: orden ascendente o descendente por el que se desea ordenar.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | where State == 'TEXAS' and EventType == 'Flood'
+  | sort by DamageProperty asc
+</code></pre></li></ul><h4 id=top>top</h4><p>Se usa para obtener las primeras n filas ordenadas por la columna indicada.</p><ul><li><p>Sintaxis:
+| <strong>top</strong> num_reg <strong>by</strong> column_name {asc|desc}</p></li><li><p>Parámetros:</p><ul><li>num_reg: número de registros que se desea obtener.</li><li>column_name: nombre de la columna por la que se desea ordenar.</li><li>asc|desc: orden ascendente o descendente por el que se desea ordenar.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | where State == 'TEXAS' and EventType == 'Flood'
+  | top 5 by DamageProperty
+  | project StartTime, EndTime, State, EventType, DamageProperty
+</code></pre></li></ul><h4 id=columnas-calculadas>columnas calculadas</h4><p>Los operadores <strong>project</strong>y <strong>extend</strong> pueden crear columnas calculadas.</p><ul><li><p>Sintaxis:
+| <strong>project</strong> column_name = expression</p></li><li><p>Parámetros:</p><ul><li>column_name: nombre de la columna que se desea dar a la columna calculada.</li><li>expression: expresión o calculo de valor.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | where State == 'TEXAS' and EventType == 'Flood'
+  | top 5 by DamageProperty desc
+  | project Duration = EndTime - StartTime
+</code></pre></li></ul><h3 id=operadores-de-agregación>Operadores de agregación</h3><h4 id=summarize>summarize</h4><p>El operador <strong>summarize</strong> realiza agrupaciones de las filas en función de la clausula. Similar a un group by en SQL.</p><ul><li><p>Sintaxis:
+| <strong>summarize</strong> common_operator <strong>by</strong> column_name</p></li><li><p>Parámetros:</p><ul><li>common_operator: operador común como los anteriormente mencionados.</li><li>column_name: nombre de la columna que se desea dar a la columna calculada.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | summarize TotalStorms = count() by State
+</code></pre></li></ul><h4 id=render>render</h4><p>El operador <strong>render</strong> permite renderizar el resultado en un gráfico o diagrama.</p><ul><li><p>Sintaxis:
+| <strong>render</strong> graphic_type</p></li><li><p>Parámetros:</p><ul><li>graphic_type: nombre del gráfico o diagrama que representará el resultado.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | summarize TotalStorms = count() by State
+  | render barchart
+</code></pre></li></ul><h4 id=countif>countif</h4><p>El operador <strong>countif()</strong> permite contar las filas en función de una condición específica.</p><ul><li><p>Sintaxis:
+| <strong>countif(expression)</strong></p></li><li><p>Parámetros:</p><ul><li>expression: expresión que hará se cuente dicho registro.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | summarize StormsWithCropDamage = countif(DamageCrops &gt; 0) by State
+  | top 5 by StormsWithCropDamage
+</code></pre></li></ul><h4 id=bin>bin</h4><p>El operador <strong>bin()</strong> permite agregar valores númericos o de tiempo y utilizarlos como un intervalo.</p><ul><li><p>Sintaxis:
+| <strong>bin(column_name, format)</strong></p></li><li><p>Parámetros:</p><ul><li>column_name: nombre de la columna.</li><li>format: formato que dará lugar al intervalo.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | where StartTime between (datetime(2007-01-01) .. datetime(2007-12-31)) 
+      and DamageCrops &gt; 0
+  | summarize EventCount = count() by bin(StartTime, 7d)
+</code></pre></li></ul><h4 id=max-min-average>max, min, average</h4><p>Los operadores <strong>min()</strong>, <strong>max()</strong> y <strong>averga()</strong> permite calcular el valor mínimo, máximo y media de una columna.</p><ul><li><p>Sintaxis:
+| <strong>min(column_name)</strong>
+| <strong>max(column_name)</strong>
+| <strong>averge(column_name)</strong></p></li><li><p>Parámetros:</p><ul><li>column_name: nombre de la columna.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | where DamageCrops &gt; 0
+  | summarize
+      MaxCropDamage=max(DamageCrops), 
+      MinCropDamage=min(DamageCrops), 
+      AvgCropDamage=avg(DamageCrops)
+      by EventType
+  | sort by AvgCropDamage
+</code></pre></li></ul><h4 id=sum>sum</h4><p>El operador <strong>sum()</strong> permite calcular la suma de los valores de una columna.</p><ul><li><p>Sintaxis:
+| <strong>sum(column_name)</strong></p></li><li><p>Parámetros:</p><ul><li>column_name: nombre de la columna.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | where StartTime between (datetime(2007-01-01) .. datetime(2007-12-31)) 
+      and DamageCrops &gt; 0
+  | summarize CropDamage = sum(DamageCrops) by bin(StartTime, 7d)
+  | render timechart
+</code></pre></li></ul><h4 id=round>round</h4><p>El operador <strong>round()</strong> permite redondear un valor numérico.</p><ul><li><p>Sintaxis:
+| <strong>round(column_name, num_decimals)</strong></p></li><li><p>Parámetros:</p><ul><li>column_name: nombre de la columna.</li><li>num_decimals: número de decimales del redondeo.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | summarize 
+      TotalStormsInState = count(),
+      StormsWithCropDamage = countif(DamageCrops &gt; 0)
+      by State
+  | extend PercentWithCropDamage = 
+      round((todouble(StormsWithCropDamage) / TotalStormsInState * 100), 2)
+  | sort by StormsWithCropDamage
+</code></pre></li></ul><h3 id=operadores-de-condición>Operadores de condición</h3><h4 id=iff>iff</h4><p>El operador <strong>iff()</strong> permite establecer una condición para una columna calculada.</p><ul><li><p>Sintaxis:
+| <strong>if(condition, value_if_true, value_if_false)</strong></p></li><li><p>Parámetros:</p><ul><li>condition: condición a realizar.</li><li>value_if_true: valor si el resultado de la condición es verdadera.</li><li>value_if_false: valor si el resultado de la condición es falsa.</li></ul></li><li><p>Ejemplos:</p><pre><code>  let windowStart = datetime(2007-07-01);
+  let windowEnd = windowStart + 13d;
+  StormEvents
+  | where EventType in (&quot;Tornado&quot;, &quot;Flood&quot;, &quot;Wildfire&quot;) 
+  | extend bin = bin_at(startofday(StartTime), 1d, windowStart) // 1
+  | extend endRange = iff(bin + 7d &gt; windowEnd, windowEnd, 
+                      iff(bin + 7d - 1d &lt; windowStart, windowStart, 
+                          iff(bin + 7d - 1d &lt; bin, bin, bin + 7d - 1d))) // 2
+  | extend range = range(bin, endRange, 1d) // 3
+  | mv-expand range to typeof(datetime) // 4
+  | summarize min(DamageProperty), max(DamageProperty), round(avg(DamageProperty)) by Timestamp=bin_at(range, 1d, windowStart), EventType // 5
+  | where Timestamp &gt;= windowStart + 7d; // 6
+</code></pre></li></ul><h4 id=case>case</h4><p>El operador <strong>case()</strong> permite devolver la expresión de resultado correspondiente al primer predicado satisfecho.</p><ul><li><p>Sintaxis:
+| <strong>case([predicate1, value_if_true], case_else)</strong></p></li><li><p>Parámetros:</p><ul><li>predicate1: primer predicado a comprobar.</li><li>value_if_true: valor si el valor coincide con el primer predicado.</li><li>case_else: sino se cumple ningún predicado, devolverá este valor.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | summarize InjuriesCount = sum(InjuriesDirect) by State
+  | extend InjuriesBucket = case (
+                              InjuriesCount &gt; 50,
+                              &quot;Large&quot;,
+                              InjuriesCount &gt; 10,
+                              &quot;Medium&quot;,
+                              InjuriesCount &gt; 0,
+                              &quot;Small&quot;,
+                              &quot;No injuries&quot;
+                          )
+  | sort by State asc
+</code></pre></li></ul><h4 id=operadores-de-unión>Operadores de unión</h4><h4 id=join>join</h4><p>El operador <strong>join</strong> permite realizar consultas uniendo varias tablas.</p><ul><li><p>Sintaxis:
+| <strong>join</strong> kind={innerunique|inner|leftouter|rightouter|fullouter|leftsemi|leftanti|anti|leftantisemi|rightsemi|rightanti|rightantisemi} column_name on table_name</p></li><li><p>Parámetros:</p><ul><li>innerunique|inner|leftouter|rightouter|fullouter|leftsemi|leftanti|anti|leftantisemi|rightsemi|rightanti|rightantisemi: tipo de unión. <a href="https://learn.microsoft.com/gl-es/kusto/query/tutorials/join-data-from-multiple-tables?view=azure-data-explorer" target=_blank>Ejemplos</a></li><li>column_name: nombre de la columna.</li><li>table_name: nombre de la tabla a unir.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | summarize PropertyDamage = sum(DamageProperty) by State
+  | join kind=innerunique PopulationData on State
+  | project State, PropertyDamagePerCapita = PropertyDamage / Population
+  | sort by PropertyDamagePerCapita
+</code></pre></li></ul><h4 id=lookup>lookup</h4><p>El operador <strong>lookup</strong> optimiza el rendimiento de las consultas en las que una tabla de hechos se enriquece con datos de una tabla de dimensiones. Para obtener el mejor rendimiento, el sistema asume de forma predeterminada que la tabla de la izquierda es la tabla de hechos más grande y la tabla de la derecha es la tabla de dimensiones más pequeñas. Es lo contrario de la suposición que usa el operador <strong>join</strong>.</p><ul><li><p>Sintaxis:
+| <strong>lookup</strong> left_table on right_table</p></li><li><p>Parámetros:</p><ul><li>left_table: nombre de la tabla grande.</li><li>right_table: nombre de la tabla pequeña.</li></ul></li><li><p>Ejemplos:</p><pre><code>  SalesFact
+  | lookup Products on ProductKey
+  | summarize TotalSales = count() by ProductCategoryName
+  | order by TotalSales desc
+</code></pre></li></ul><h4 id=join-1>Join</h4><p>Las combinaciones también se pueden realizar en función de los resultados de la consulta de la misma tabla.</p><ul><li><p>Sintaxis:
+| <strong>join</strong> kind={innerunique|inner|leftouter|rightouter|fullouter|leftsemi|leftanti|anti|leftantisemi|rightsemi|rightanti|rightantisemi} (subquery)</p></li><li><p>Parámetros:</p><ul><li>subquery: subconsulta a unir.</li></ul></li><li><p>Ejemplos:</p><pre><code>  StormEvents
+  | where EventType == &quot;Lightning&quot;
+  | distinct State
+  | join kind=inner (
+      StormEvents 
+      | where EventType == &quot;Avalanche&quot;
+      | distinct State
+      )
+      on State
+  | project State
+</code></pre></li></ul><h4 id=visualizaciones-geoespaciales>Visualizaciones geoespaciales</h4><h4 id=trazar-puntos-en-un-mapa>Trazar puntos en un mapa</h4><pre><code>    StormEvents
+    | take 100
+    | project BeginLon, BeginLat
+    | render scatterchart with (kind = map)
+</code></pre><h4 id=trazar-varias-series-de-puntos>Trazar varias series de puntos</h4><pre><code>    StormEvents
+    | take 100
+    | project BeginLon, BeginLat, EventType
+    | render scatterchart with (kind = map)
+</code></pre><h4 id=usar-valores-geojson-para-trazar-puntos-en-un-mapa>Usar valores GeoJSON para trazar puntos en un mapa</h4><pre><code>    StormEvents
+    | project BeginLon, BeginLat
+    | summarize by hash=geo_point_to_s2cell(BeginLon, BeginLat, 5)
+    | project point = geo_s2cell_to_central_point(hash)
+    | project lng = toreal(point.coordinates[0]), lat = toreal(point.coordinates[1])
+    | render scatterchart with (kind = map)
+</code></pre><h4 id=representar-puntos-de-datos-con-burbujas-de-tamaño-variable>Representar puntos de datos con burbujas de tamaño variable</h4><pre><code>    StormEvents
+    | where EventType == &quot;Tornado&quot;
+    | project BeginLon, BeginLat
+    | where isnotnull(BeginLat) and isnotnull(BeginLon)
+    | summarize count_summary=count() by hash = geo_point_to_s2cell(BeginLon, BeginLat, 4)
+    | project geo_s2cell_to_central_point(hash), count_summary
+    | extend Events = &quot;count&quot;
+    | render piechart with (kind = map)
+</code></pre><h4 id=mostrar-puntos-dentro-de-un-área-específica>Mostrar puntos dentro de un área específica</h4><pre><code>    let southern_california = dynamic({
+        &quot;type&quot;: &quot;Polygon&quot;,
+        &quot;coordinates&quot;: [[[-119.5, 34.5], [-115.5, 34.5], [-115.5, 32.5], [-119.5, 32.5], [-119.5, 34.5]]
+        ]});
+    StormEvents
+    | where geo_point_in_polygon(BeginLon, BeginLat, southern_california)
+    | project BeginLon, BeginLat
+    | summarize count_summary = count() by hash = geo_point_to_s2cell(BeginLon, BeginLat, 8)
+    | project geo_s2cell_to_central_point(hash), count_summary
+    | extend Events = &quot;count&quot;
+    | render piechart with (kind = map)
+</code></pre><h4 id=mostrar-puntos-cercanos-en-un-linestring>Mostrar puntos cercanos en un LineString</h4><pre><code>    let roadToKeyWest = dynamic({
+    &quot;type&quot;:&quot;linestring&quot;,
+    &quot;coordinates&quot;:[
+            [
+                -81.79595947265625,
+                24.56461038017685
+            ],
+            [
+                -81.595458984375,
+                24.627044746156027
+            ],
+            [
+                -81.52130126953125,
+                24.666986385216273
+            ],
+            [
+                -81.35650634765625,
+                24.66449040712424
+            ],
+            [
+                -81.32354736328125,
+                24.647017162630366
+            ],
+            [
+                -80.8099365234375,
+                24.821639356846607
+            ],
+            [
+                -80.62042236328125,
+                24.93127614538456
+            ],
+            [
+                -80.37872314453125,
+                25.175116531621764
+            ],
+            [
+                -80.42266845703124,
+                25.19251511519153
+            ],
+            [
+                -80.4803466796875,
+                25.46063471847754
+            ]
+            ]});
+    StormEvents
+    | where isnotempty(BeginLat) and isnotempty(BeginLon)
+    | project BeginLon, BeginLat, EventType
+    | where geo_distance_point_to_line(BeginLon, BeginLat, roadToKeyWest) &lt; 500
+    | render scatterchart with (kind=map)
+</code></pre><h4 id=mostrar-puntos-cercanos-en-un-polígono>Mostrar puntos cercanos en un polígono</h4><pre><code>    let roadToKeyWest = dynamic({
+    &quot;type&quot;:&quot;polygon&quot;,
+    &quot;coordinates&quot;:[
+            [
+                [
+                -80.08209228515625,
+                25.39117928167583
+                ],
+                [
+                -80.4913330078125,
+                25.517657429994035
+                ],
+                [
+                -80.57922363281249,
+                25.477992320574817
+                ],
+                [
+                -82.188720703125,
+                24.632038149596895
+                ],
+                [
+                -82.1942138671875,
+                24.53712939907993
+                ],
+                [
+                -82.13104248046875,
+                24.412140070651528
+                ],
+                [
+                -81.81243896484375,
+                24.43714786161562
+                ],
+                [
+                -80.58746337890625,
+                24.794214972389486
+                ],
+                [
+                -80.08209228515625,
+                25.39117928167583
+                ]
+            ]
+            ]});
+    StormEvents
+    | where isnotempty(BeginLat) and isnotempty(BeginLon)
+    | project BeginLon, BeginLat, EventType
+    | where geo_distance_point_to_polygon(BeginLon, BeginLat, roadToKeyWest) &lt; 500
+    | render scatterchart with (kind=map)
+</code></pre><h4 id=encuentre-anomalías-en-función-de-datos-geoespaciales>Encuentre anomalías en función de datos geoespaciales</h4><pre><code>    let stateOfInterest = &quot;Texas&quot;;
+    let statePolygon = materialize(
+        US_States
+        | extend name = tostring(features.properties.NAME)
+        | where name == stateOfInterest
+        | project geometry=features.geometry);
+    let stateCoveringS2cells = statePolygon
+        | project s2Cells = geo_polygon_to_s2cells(geometry, 9);
+    StormEvents
+    | extend s2Cell = geo_point_to_s2cell(BeginLon, BeginLat, 9)
+    | where s2Cell in (stateCoveringS2cells)
+    | where geo_point_in_polygon(BeginLon, BeginLat, toscalar(statePolygon))
+    | make-series damage = avg(DamageProperty + DamageCrops) default = double(0.0) on StartTime step 7d
+    | extend anomalies=series_decompose_anomalies(damage)
+    | render anomalychart with (anomalycolumns=anomalies)
+</code></pre><blockquote class="dream-alert note"><p class=heading><ion-icon name=information-circle-outline></ion-icon>Nota</p><p>Para ver las imagenes de los resultados de las consultas de ejemplos visitad esta <a href="https://learn.microsoft.com/gl-es/kusto/query/tutorials/create-geospatial-visualizations?view=azure-data-explorer" target=_blank>web</a>
+.</p></blockquote><h2 id=referencias>Referencias</h2><p><a href="https://learn.microsoft.com/es-es/kusto/query/?view=microsoft-fabric" target=_blank>Microsoft Learn</a></p></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2026 Mi Blog Técnico</p><p class=text-sm>🌱
+<span class=text-base-content/60>Powered by <a class=hover:underline href=https://gohugo.io/ target=_blank>Hugo</a> with theme
+<a class=hover:underline href=https://github.com/g1eny0ung/hugo-theme-dream target=_blank>Dream</a>.</span></p></div><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2026 Mi Blog Técnico</p><p class=text-sm>🌱
+<span class=text-base-content/60>Powered by <a class=hover:underline href=https://gohugo.io/ target=_blank>Hugo</a> with theme
+<a class=hover:underline href=https://github.com/g1eny0ung/hugo-theme-dream target=_blank>Dream</a>.</span></p></div><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme=null,window.darkTheme=null</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/Portfolio/js/grid.min.js></script><script src=/Portfolio/js/main.min.js></script><script src=/Portfolio/js/toc.min.js></script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

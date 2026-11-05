@@ -1,0 +1,133 @@
+<!doctype html><html lang=es x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Buenas prácticas en Web API | Mi Blog Técnico</title><link href=/Portfolio/img/Icono.png rel=icon type=image/x-icon><link rel=canonical href=https://cousigoico.github.io/Portfolio/posts/dotnet/best-practices-api/><meta name=author content="Fco. Javier Cousiño"><meta name=description content="Indice Injección de dependencias Principios RESTFul Seguridad, autenticación y autorización Errores Data Transfer Object Versionado Cache Log Validación de datos Paginación y filtrado Métodos asíncronos Documentación Referencias Injección de dependencias Reduce el acomplamiento entre componentes.
+public voi ConfigureServices(IServiceCollection services) { servics.AddScoped<IService, Service>(); } Principios RESTFul Usa los códigos de estado HTTP y los verbos de manera correcta.
+"><meta name=keywords content=".NET,API,REST"><meta name=generator content="Hugo 0.169.0"><meta property="og:url" content="https://cousigoico.github.io/Portfolio/posts/dotnet/best-practices-api/"><meta property="og:site_name" content="Mi Blog Técnico"><meta property="og:title" content="Buenas prácticas en Web API"><meta property="og:description" content="Indice Injección de dependencias Principios RESTFul Seguridad, autenticación y autorización Errores Data Transfer Object Versionado Cache Log Validación de datos Paginación y filtrado Métodos asíncronos Documentación Referencias Injección de dependencias Reduce el acomplamiento entre componentes.
+public voi ConfigureServices(IServiceCollection services) { servics.AddScoped<IService, Service>(); } Principios RESTFul Usa los códigos de estado HTTP y los verbos de manera correcta."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-10-12T07:30:17+02:00"><meta property="article:modified_time" content="2025-10-12T07:30:17+02:00"><meta property="article:tag" content=".NET"><meta property="article:tag" content="API"><meta property="article:tag" content="REST"><meta name=twitter:card content="summary"><meta name=twitter:title content="Buenas prácticas en Web API"><meta name=twitter:description content="Indice Injección de dependencias Principios RESTFul Seguridad, autenticación y autorización Errores Data Transfer Object Versionado Cache Log Validación de datos Paginación y filtrado Métodos asíncronos Documentación Referencias Injección de dependencias Reduce el acomplamiento entre componentes.
+public voi ConfigureServices(IServiceCollection services) { servics.AddScoped<IService, Service>(); } Principios RESTFul Usa los códigos de estado HTTP y los verbos de manera correcta."><link rel=stylesheet href=/Portfolio/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-4EHxtjnR5rL8JzbY12OKQJr81ESm7JBEb49ORPo29AY=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav class="mt-4 lg:mt-8 py-4"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Voltear!><div class="h-10 rounded-full"><img src=/Portfolio/img/Icono.png alt></div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/posts title=Archivos><ion-icon name=archive></ion-icon>Archivos</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/categories title="Todas las categorías"><ion-icon name=grid></ion-icon>Todas las categorías</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/Portfolio/tags title="Todas las etiquetas"><ion-icon name=pricetags></ion-icon>Todas las etiquetas</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/posts title=Archivos><ion-icon class=group-hover:text-primary-content name=archive></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/categories title="Todas las categorías"><ion-icon class=group-hover:text-primary-content name=grid></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/Portfolio/tags title="Todas las etiquetas"><ion-icon class=group-hover:text-primary-content name=pricetags></ion-icon></a></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Buenas prácticas en Web API"><meta itemprop=description content="Indice Injección de dependencias Principios RESTFul Seguridad, autenticación y autorización Errores Data Transfer Object Versionado Cache Log Validación de datos Paginación y filtrado Métodos asíncronos Documentación Referencias Injección de dependencias Reduce el acomplamiento entre componentes.
+public voi ConfigureServices(IServiceCollection services) { servics.AddScoped<IService, Service>(); } Principios RESTFul Usa los códigos de estado HTTP y los verbos de manera correcta."><meta itemprop=datePublished content="2025-10-12T07:30:17+02:00"><meta itemprop=dateModified content="2025-10-12T07:30:17+02:00"><meta itemprop=wordCount content="549"><meta itemprop=keywords content=".NET,API,REST"><header><h1 itemprop=headline>Buenas prácticas en Web API</h1><p class=text-sm>domingo, oct 12, 2025
+| <span>3 minutos de lectura</span>
+| <span>Actualizado en
+domingo, oct 12, 2025</span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>Fco. Javier Cousiño</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=Buenas%20pr%c3%a1cticas%20en%20Web%20API&amp;url=https://cousigoico.github.io/Portfolio/posts/dotnet/best-practices-api/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://cousigoico.github.io/Portfolio/posts/dotnet/best-practices-api/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=Buenas%20pr%c3%a1cticas%20en%20Web%20API%20https://cousigoico.github.io/Portfolio/posts/dotnet/best-practices-api/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><h2 id=indice>Indice</h2><ol><li><a href=#DependencyInjection>Injección de dependencias</a></li><li><a href=#RESTFul>Principios RESTFul</a></li><li><a href=#Security>Seguridad, autenticación y autorización</a></li><li><a href=#Errors>Errores</a></li><li><a href=#DTOs>Data Transfer Object</a></li><li><a href=#Versioning>Versionado</a></li><li><a href=#Cache>Cache</a></li><li><a href=#Log>Log</a></li><li><a href=#DataValidation>Validación de datos</a></li><li><a href=#PaginationAndFilter>Paginación y filtrado</a></li><li><a href=#AsyncMethods>Métodos asíncronos</a></li><li><a href=#Documentation>Documentación</a></li><li><a href=#References>Referencias</a></li></ol><h2 id=injección-de-dependencias>Injección de dependencias</h2><p>Reduce el acomplamiento entre componentes.</p><pre><code>    public voi ConfigureServices(IServiceCollection services)
+    {
+        servics.AddScoped&lt;IService, Service&gt;();
+    }
+</code></pre><h2 id=principios-restful>Principios RESTFul</h2><p>Usa los códigos de estado HTTP y los verbos de manera correcta.</p><pre><code>    [HttpGet(&quot;{id}&quot;)]
+    public async Task&lt;IActionResult&gt; GetUser(int id)
+    {
+        var user = await _userService.GetUserAsync(id);
+        return user == null ? NotFound() : Ok(user);
+    }
+</code></pre><h2 id=seguridad-autenticación-y-autorización>Seguridad, autenticación y autorización</h2><p>Usa siempre el protocolo seguro HTTPS para encriptar las comunicaciones. Implementa JWT (JSON Web Token) para la autenticación y autorización.</p><pre><code>    [Authorize]
+    [HttpGet(&quot;secure-data&quot;)]
+    public IActionResult GetSecureData()
+    {
+        return Ok(&quot;This data is secured!&quot;);
+    }
+</code></pre><h2 id=errores>Errores</h2><p>Usa un middleware para administrar los errores no controlados.</p><pre><code>    public class ErrorHandlingMiddleware
+    {
+        public async Task Invoke(HttpContext context, RequestDelegate next)
+        {
+            try
+            {
+                await next(context);
+            }
+            catch (Exception ex)
+            {
+                await HandleExceptionAsync(context, ex);
+            }
+        }
+
+        private static Task HandleExceptionAsync(HttpContext context, Exception ex)
+        {
+            context.Response.StatusCode = 500;
+            return context.Response.WriteAsync(ex.Message);
+        }
+    }
+</code></pre><h2 id=data-transfer-object>Data Transfer Object</h2><p>Usa DTO&rsquo;s (Data Transfer Object) para transferir la información a procesar.</p><pre><code>    public class StudentDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+    }
+</code></pre><h2 id=versionado>Versionado</h2><p>Versiona las API para mantener retrocompatibilidad y de esta manera, asegurar que no rompas sistemas que esten usando versiones anteriores.</p><pre><code>    [ApiVersion(&quot;1.0&quot;)]
+    [Route(&quot;api/v{version:apiVersion}/[controller]&quot;)]
+    public class UsersController : ControllerBase
+    {
+        [HttpGet]
+        public IActionResult GetV1() =&gt; Ok(&quot;Version 1&quot;);
+    }
+</code></pre><h2 id=cache>Cache</h2><p>Usa la cache para evitar que el servidor se sobrecargue realizando la misma tarea.</p><pre><code>    [ResponseCache(Duration = 60)]
+    [HttpGet(&quot;{id}&quot;)]
+    public IActionResult GetCachedUser(int id)
+    {
+        var user = _userService.GetUser(id);
+        return Ok(user);
+    }
+</code></pre><h2 id=log>Log</h2><p>Es muy importante saber que es lo que entra y lo que sale de tu API, por lo que necesitarás registrar en un log dicha informaicón. Puedes usar librerias como <strong><a href=https://serilog.net/ target=_blank>Seriolog</a>
+</strong>o <strong><a href=https://nlog-project.org/ target=_blank>NLog</a>
+</strong>.</p><pre><code>    public class MyService
+    {
+        private readonly ILogger&lt;MyService&gt; _logger;
+
+        public MyService(ILogger&lt;MyService&gt; logger)
+        {
+            _logger = logger;
+        }
+
+        public void Process()
+        {
+            _logger.LogInformation(&quot;Processing request at {Time}&quot;, DateTime.UtcNow);
+        }
+    }
+</code></pre><h2 id=validación-de-datos>Validación de datos</h2><p>Para validar la información que te llega a la API puedes usar herramientas como <strong>Data Annotations</strong> o <strong>Fluent Validation</strong>.</p><pre><code>    public class UserDto
+    {
+        [Required]
+        [StringLength(50, MinimumLength = 2)]
+        public string Name { get; set; }
+
+        [EmailAddress]
+        public string Email { get; set; }
+    }
+</code></pre><h2 id=paginación-y-filtrado>Paginación y filtrado</h2><p>Si tienes que realizar una consulta muy grande, tu servidor fallará o te dará un Timeout. Para evitar esto tendrás que paginar la consulta y/o filtrarla.</p><pre><code>    [HttpGet]
+    public async Task&lt;IActionResult&gt; GetUsers([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        var users = await _userService.GetUsersAsync(pageNumber, pageSize);
+        return Ok(users);
+    }
+</code></pre><h2 id=métodos-asíncronos>Métodos asíncronos</h2><p>Para mejorar la escalabilidad y la respuesta usa métodos asíncronos.</p><pre><code>    public async Task&lt;IActionResult&gt; GetUser(int id)
+    {
+        var user = await _userService.GetUserByIdAsync(id);
+        return Ok(user);
+    }
+</code></pre><h2 id=documentación>Documentación</h2><p>Es muy importante documentar la API para que el usuario que vaya a usarla entienda como debe realizar las llamadas a los métodos de la misma. Para ello puedes usar herramientas como <strong><a href=https://swagger.io/ target=_blank>Swagger</a>
+</strong>que te proveen de una página web con los métodos, verbos, parámetros, &mldr;</p><pre><code>    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSwaggerGen(c =&gt;
+        {
+            c.SwaggerDoc(&quot;v1&quot;, new OpenApiInfo { Title = &quot;My API&quot;, Version = &quot;v1&quot; });
+        });
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c =&gt;
+        {
+            c.SwaggerEndpoint(&quot;/swagger/v1/swagger.json&quot;, &quot;My API V1&quot;);
+        });
+    }
+</code></pre><h3 id=referencias>Referencias</h3><p><a href=https://dev.to/luqman_bolajoko/best-practices-for-building-net-core-web-apis-5hc1 target=_blank>Dev.io</a></p></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2026 Mi Blog Técnico</p><p class=text-sm>🌱
+<span class=text-base-content/60>Powered by <a class=hover:underline href=https://gohugo.io/ target=_blank>Hugo</a> with theme
+<a class=hover:underline href=https://github.com/g1eny0ung/hugo-theme-dream target=_blank>Dream</a>.</span></p></div><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2026 Mi Blog Técnico</p><p class=text-sm>🌱
+<span class=text-base-content/60>Powered by <a class=hover:underline href=https://gohugo.io/ target=_blank>Hugo</a> with theme
+<a class=hover:underline href=https://github.com/g1eny0ung/hugo-theme-dream target=_blank>Dream</a>.</span></p></div><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme=null,window.darkTheme=null</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/Portfolio/js/grid.min.js></script><script src=/Portfolio/js/main.min.js></script><script src=/Portfolio/js/toc.min.js></script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>
