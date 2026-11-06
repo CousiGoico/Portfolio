@@ -1,5 +1,6 @@
 baseURL = "https://cousigoico.github.io/Portfolio/"
 languageCode = "es"
+defaultContentLanguage = "es"
 title = "Mi Blog Técnico"
 theme = "hugo-theme-dream"
 themesDir = "themes"
